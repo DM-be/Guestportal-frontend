@@ -8,7 +8,7 @@ const Routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'self-register', component: SelfRegisterComponent },
   { path: '',
-    redirectTo: '/admin',
+    redirectTo: '/self-register',
     pathMatch: 'full'
   },
 ];
