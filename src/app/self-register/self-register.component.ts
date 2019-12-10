@@ -4,7 +4,8 @@ import { ActiveDirectoryUser } from '../models/ActiveDirectoryUser';
 import { Observable } from 'rxjs';
 
 import {map, startWith} from 'rxjs/operators';
-import { Pkcs11Service } from '../services/pkcs11.service';
+import { WebSocketService } from '../services/web-socket.service';
+import { EidUser } from '../models/EidUser';
 
 
 
@@ -43,15 +44,15 @@ export class SelfRegisterComponent implements OnInit {
 
   filteredActiveDirectoryUsers: Observable<ActiveDirectoryUser []>;
 
-  constructor(private pkcs11Service: Pkcs11Service) {
+  constructor(private webSocketService: WebSocketService) {
     this.filteredActiveDirectoryUsers = this.activeDirectoryUsersFormControl.valueChanges
     .pipe(
       startWith(''),
       map(user => user ? this.filterActiveDirectoryUsers(user) : this.activeDirectoryUsers.slice())
     );
-
-    this.pkcs11Service.getUserEidData().subscribe(data => console.log(data))
-
+    this.webSocketService.listenToEidUserEvent().subscribe((eidUser: EidUser) => {
+     console.log(eidUser as EidUser)
+    }) ;
 
    }
 
@@ -60,7 +61,7 @@ export class SelfRegisterComponent implements OnInit {
 
   private filterActiveDirectoryUsers(value: string): ActiveDirectoryUser[] {
     const filterValue = value.toLowerCase();
-    return this.activeDirectoryUsers.filter(state => state.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.activeDirectoryUsers.filter((adUser: ActiveDirectoryUser) => adUser.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
 }
