@@ -4,6 +4,7 @@ import { ActiveDirectoryUser } from '../models/ActiveDirectoryUser';
 import { Observable } from 'rxjs';
 
 import {map, startWith} from 'rxjs/operators';
+import { Pkcs11Service } from '../services/pkcs11.service';
 
 
 
@@ -13,6 +14,10 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./self-register.component.css']
 })
 export class SelfRegisterComponent implements OnInit {
+
+
+
+
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -38,12 +43,16 @@ export class SelfRegisterComponent implements OnInit {
 
   filteredActiveDirectoryUsers: Observable<ActiveDirectoryUser []>;
 
-  constructor() {
+  constructor(private pkcs11Service: Pkcs11Service) {
     this.filteredActiveDirectoryUsers = this.activeDirectoryUsersFormControl.valueChanges
     .pipe(
       startWith(''),
       map(user => user ? this.filterActiveDirectoryUsers(user) : this.activeDirectoryUsers.slice())
     );
+
+    this.pkcs11Service.getUserEidData().subscribe(data => console.log(data))
+
+
    }
 
   ngOnInit() {
