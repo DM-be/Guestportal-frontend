@@ -11,6 +11,10 @@ import { AngularMaterialModule } from './angular-material.module';
 import { TopToolbarComponent } from './top-toolbar/top-toolbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]
