@@ -10,8 +10,15 @@ import { AdminComponent } from './admin/admin.component';
 import { AngularMaterialModule } from './angular-material.module';
 import { TopToolbarComponent } from './top-toolbar/top-toolbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+// authenticatie
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+// used to create fake backend
+import { fakeBackendProvider } from './helpers/fake-backend';
+
+import { ErrorInterceptor } from './helpers/error.interceptor';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
 
@@ -29,10 +36,17 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     SocketIoModule.forRoot(config)
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+        // provider used to create fake backend
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
