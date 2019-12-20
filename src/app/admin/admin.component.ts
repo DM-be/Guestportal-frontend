@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
-import { UserService } from '../services/user.service';
-import {  AuthenticationService } from '../services/authentication.service';
+import { UserService ,AuthenticationService} from '../services';
 
 @Component({
   selector: 'app-admin',

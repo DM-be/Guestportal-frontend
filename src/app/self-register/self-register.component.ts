@@ -4,9 +4,8 @@ import { ActiveDirectoryUser } from "../models/ActiveDirectoryUser";
 import { Observable } from "rxjs";
 
 import { map, startWith } from "rxjs/operators";
-import { WebSocketService } from "../services/web-socket.service";
 import { EidUser } from "../models/EidUser";
-import { IseService } from "../services/ise.service";
+import { IseService, WebSocketService } from "../services";
 
 @Component({
   selector: "app-self-register",
