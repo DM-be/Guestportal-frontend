@@ -1,4 +1,4 @@
 export interface ActiveDirectoryUser {
     name: string, 
-    phoneNumber?: string
+    email: string // needed for guest user create api but hidden for user 
 }

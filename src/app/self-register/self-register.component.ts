@@ -7,6 +7,7 @@ import { map, startWith } from "rxjs/operators";
 import { WebSocketService } from "../services/web-socket.service";
 import { EidUser } from "../models/EidUser";
 import { IseService } from "../services/ise.service";
+import { CreateGuestUserDto } from "../models/CreateGuestUserDto";
 
 @Component({
   selector: "app-self-register",
@@ -18,6 +19,8 @@ export class SelfRegisterComponent implements OnInit {
     Validators.required,
     Validators.email
   ]);
+
+  private createGuestUserDto: CreateGuestUserDto;
 
   activeDirectoryUsersFormControl = new FormControl();
 
@@ -33,6 +36,7 @@ export class SelfRegisterComponent implements OnInit {
   async ngOnInit() {
     this.activeDirectoryUsers = await this.iseService.getActiveDirectoryUsers();
     this.pipeFilteredActiveDirectoryUsers();
+    this.createGuestUserDto = new CreateGuestUserDto();
   }
 
   private pipeFilteredActiveDirectoryUsers() {
@@ -47,8 +51,15 @@ export class SelfRegisterComponent implements OnInit {
     this.webSocketService
       .listenToEidUserEvent()
       .subscribe((eidUser: EidUser) => {
-        console.log(eidUser as EidUser);
+        this.createGuestUserDto.firstName = eidUser.firstNames[0];
+        this.createGuestUserDto.surName = eidUser.surName;
       });
+  }
+
+
+  public sendCreatUserDto() {
+      this.createGuestUserDto.password = "" // formcontrol password
+      this.createGuestUserDto.personBeingVisited = "";
   }
 
   private filterActiveDirectoryUsers(value: string): ActiveDirectoryUser[] {
