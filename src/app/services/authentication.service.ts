@@ -5,7 +5,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../models/user';
+import Axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
 
+const BASE_URL = "http://localhost:3000";
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
@@ -20,14 +22,35 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
-            .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                this.currentUserSubject.next(user);
-                return user;
-            }));
+    public async login(email: string, password: string) {
+      //try{
+      //  return this.http.get<any>(`http://localhost:3000/users`, { email, password })
+      //              .pipe(map(user => {
+      //                  // store user details and jwt token in local storage to keep user logged in between page refreshes
+      //                  localStorage.setItem('currentUser', JSON.stringify(user));
+      //                  this.currentUserSubject.next(user);
+      //                  return user;
+      //              }));
+      //}
+      //catch (error) {
+      //  console.log("could not authenticate user ", error);
+      //}
+      try {
+        const url = `${BASE_URL}/auth/`;
+        let axiosResponse: AxiosResponse = await Axios.post(url,
+          {
+            email: email,
+            password: password
+          }
+          ); // 204
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+                        localStorage.setItem('currentUser', JSON.stringify(axiosResponse.data as User));
+                        this.currentUserSubject.next(axiosResponse.data as User);
+        return axiosResponse.data as User;
+      } catch (error) {
+        console.log("could not authenticate user ", error);
+      }
+
     }
 
     logout() {
