@@ -1,6 +1,5 @@
 import { environment } from './../../environments/environment.prod';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -13,7 +12,7 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
+    constructor() {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -23,18 +22,6 @@ export class AuthenticationService {
     }
 
     public async login(email: string, password: string) {
-      //try{
-      //  return this.http.get<any>(`http://localhost:3000/users`, { email, password })
-      //              .pipe(map(user => {
-      //                  // store user details and jwt token in local storage to keep user logged in between page refreshes
-      //                  localStorage.setItem('currentUser', JSON.stringify(user));
-      //                  this.currentUserSubject.next(user);
-      //                  return user;
-      //              }));
-      //}
-      //catch (error) {
-      //  console.log("could not authenticate user ", error);
-      //}
       try {
         const url = `${BASE_URL}/auth/`;
         let axiosResponse: AxiosResponse = await Axios.post(url,
