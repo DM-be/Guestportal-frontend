@@ -21,7 +21,7 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    public async login(email: string, password: string) {
+    public async login(email: string, password: string): Promise<User> {
       try {
         const url = `${BASE_URL}/auth/`;
         let axiosResponse: AxiosResponse = await Axios.post(url,
