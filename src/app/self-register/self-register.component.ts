@@ -17,7 +17,7 @@ export class SelfRegisterComponent implements OnInit {
     Validators.required,
     Validators.email
   ]);
-
+  title = 'Self registration'
   activeDirectoryUsersFormControl = new FormControl();
 
   activeDirectoryUsers: ActiveDirectoryUser[];

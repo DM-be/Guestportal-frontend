@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
-
+  title = 'Login'
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,

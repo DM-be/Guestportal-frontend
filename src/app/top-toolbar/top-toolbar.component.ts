@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {  AuthenticationService} from '../services';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class TopToolbarComponent implements OnInit {
   currentUser: User;
+  @Input() title:string;
   constructor(private authenticationService: AuthenticationService, private router: Router) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }

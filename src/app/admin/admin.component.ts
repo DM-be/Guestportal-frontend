@@ -13,6 +13,7 @@ export class AdminComponent implements OnInit {
   loading = false;
   users: User[];
   currentUser: User;
+  title = 'Admin'
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
