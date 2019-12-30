@@ -4,7 +4,6 @@ import { ActiveDirectoryUser } from "../models/ActiveDirectoryUser";
 import { Observable } from "rxjs";
 
 import { map, startWith } from "rxjs/operators";
-import { WebSocketService } from "../services/web-socket.service";
 import { EidUser } from "../models/EidUser";
 import { IseService } from "../services/ise.service";
 import { CreateGuestUserDto } from "../models/CreateGuestUserDto";
@@ -28,10 +27,7 @@ export class SelfRegisterComponent implements OnInit {
 
   filteredActiveDirectoryUsers: Observable<ActiveDirectoryUser[]>;
 
-  constructor(
-    private webSocketService: WebSocketService,
-    private iseService: IseService
-  ) {}
+  constructor(private iseService: IseService) {}
 
   async ngOnInit() {
     this.activeDirectoryUsers = await this.iseService.getActiveDirectoryUsers();
@@ -48,18 +44,17 @@ export class SelfRegisterComponent implements OnInit {
           : this.activeDirectoryUsers.slice()
       )
     );
-    this.webSocketService
-      .listenToEidUserEvent()
-      .subscribe((eidUser: EidUser) => {
-        this.createGuestUserDto.firstName = eidUser.firstNames[0];
-        this.createGuestUserDto.surName = eidUser.surName;
-      });
+    // this.webSocketService
+    //   .listenToEidUserEvent()
+    //   .subscribe((eidUser: EidUser) => {
+    //     this.createGuestUserDto.firstName = eidUser.firstNames[0];
+    //     this.createGuestUserDto.surName = eidUser.surName;
+    //   });
   }
 
-
   public sendCreatUserDto() {
-      this.createGuestUserDto.password = "" // formcontrol password
-      this.createGuestUserDto.personBeingVisited = "";
+    this.createGuestUserDto.password = ""; // formcontrol password
+    this.createGuestUserDto.personBeingVisited = "";
   }
 
   private filterActiveDirectoryUsers(value: string): ActiveDirectoryUser[] {

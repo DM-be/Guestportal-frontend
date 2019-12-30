@@ -1,19 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
-import { SelfRegisterComponent } from './self-register/self-register.component';
-import { AdminComponent } from './admin/admin.component';
-import { AngularMaterialModule } from './angular-material.module';
-import { TopToolbarComponent } from './top-toolbar/top-toolbar.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { LoginComponent } from "./login/login.component";
+import { SelfRegisterComponent } from "./self-register/self-register.component";
+import { AdminComponent } from "./admin/admin.component";
+import { AngularMaterialModule } from "./angular-material.module";
+import { TopToolbarComponent } from "./top-toolbar/top-toolbar.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SocketsModule } from "./modules/sockets/sockets.module";
 
 @NgModule({
   declarations: [
@@ -24,15 +21,15 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
     TopToolbarComponent
   ],
   imports: [
+    SocketsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
-    ReactiveFormsModule,
-    SocketIoModule.forRoot(config)
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
