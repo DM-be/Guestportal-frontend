@@ -22,6 +22,8 @@ import {
    MatMenuModule,
    MatAutocomplete,
    MatAutocompleteModule,
+   MatProgressSpinnerModule,
+   MatCardModule,
    MatStepperModule
 } from '@angular/material';
 
@@ -31,6 +33,7 @@ import {
       MatButtonModule,
       MatToolbarModule,
       MatIconModule,
+      MatProgressSpinnerModule,
       MatSidenavModule,
       MatBadgeModule,
       MatListModule,
@@ -42,6 +45,7 @@ import {
       MatDatepickerModule,
       MatNativeDateModule,
       MatChipsModule,
+      MatCardModule,
       MatTooltipModule,
       MatTableModule,
       MatPaginatorModule,
@@ -57,7 +61,9 @@ import {
       MatBadgeModule,
       MatListModule,
       MatGridListModule,
+      MatProgressSpinnerModule,
       MatInputModule,
+      MatCardModule,
       MatFormFieldModule,
       MatSelectModule,
       MatRadioModule,

@@ -1,37 +1,32 @@
 <app-top-toolbar [title]="title"></app-top-toolbar>
-<div  class="example-container">
-  <div class="alert alert-info">
-      Username: a@a.be     password: Vergeten123!
+<div class="example-container">
+    <mat-card-header>
+      <mat-card-title>Login with   Username: a@a.be     password: Vergeten123!</mat-card-title>
+    </mat-card-header>
 
-  </div>
-  <div class="card">
-      <h4 class="card-header">Angular 8 JWT Login Example</h4>
-      <div class="card-body">
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-              <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                  <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                      <div *ngIf="f.username.errors.required">Username is required</div>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                      <div *ngIf="f.password.errors.required">Password is required</div>
-                  </div>
-              </div>
-              <button [disabled]="loading" class="btn btn-primary">
-                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                  Login
-              </button>
-              <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-          </form>
-      </div>
-  </div>
+
+
+
+              <mat-form-field class="example-full-width">
+              <input matInput placeholder="Username" [(ngModel)]="username" name="username"  [formControl]="emailFormControl">
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Username is <strong>required</strong>
+              </mat-error>
+              </mat-form-field>
+
+
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required (keyup.enter)="login()">
+              </mat-form-field>
+
+
+      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+
+    <mat-card-actions>
+      <button mat-raised-button (click)="login()" color="primary" >Login</button>
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+    </mat-card-actions>
 </div>
-
-
-
-
