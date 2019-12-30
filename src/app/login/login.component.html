@@ -3,10 +3,6 @@
     <mat-card-header>
       <mat-card-title>Login with   Username: a@a.be     password: Vergeten123!</mat-card-title>
     </mat-card-header>
-
-
-
-
               <mat-form-field class="example-full-width">
               <input matInput placeholder="Username" [(ngModel)]="username" name="username"  [formControl]="emailFormControl">
               <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -16,8 +12,6 @@
                 Username is <strong>required</strong>
               </mat-error>
               </mat-form-field>
-
-
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required (keyup.enter)="login()">
               </mat-form-field>
