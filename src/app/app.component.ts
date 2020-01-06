@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { User } from './models/user';
+import { AdminUser } from './models/AdminUser';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,11 @@ import { User } from './models/user';
 })
 export class AppComponent {
   title = 'guest-portal-frontend';
-  currentUser: User;
+  currentUser: AdminUser;
 
-  constructor() { }
+  constructor() {
+    
+  }
 
 
 }

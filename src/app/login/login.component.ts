@@ -1,3 +1,13 @@
+// Onnodige imports wegdoen
+// Onnodige variabelen wegdoen
+// ngOnInit() return url is dat nodig
+// get f() is dit nodig
+// private/public schrijven bij methodes en return type (bv; bij login() moet het leeg promise zijn Promise<void>)
+// Is this.submitted nodig
+// Is this.loading nodig
+// "this.router.navigate(['/admin']);" moet kunnen navigeren zonder reload derachter (met await misschien)
+
+import { CreateUserDTO } from './../models/CreateUserDTO';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -31,14 +41,12 @@ export class LoginComponent implements OnInit {
       private authenticationService: AuthenticationService
   ) {
       // redirect to home if already logged in
-      if (this.authenticationService.currentUserValue) {
+      if (this.authenticationService.currentUserValue != null) {
           this.router.navigate(['/admin']);
       }
   }
 
   ngOnInit() {
-
-
       // get return url from route parameters or default to '/'
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
@@ -50,13 +58,18 @@ export class LoginComponent implements OnInit {
       this.submitted = true;
       this.loading = true;
       try{
-        this.authenticationService.login(this.username, this.password);
+        let loginUser: CreateUserDTO = {
+          email: this.username,
+          password: this.password
+        }
+        this.authenticationService.login( loginUser  );
         this.router.navigate(['/admin']);
         location.reload();
       }
       catch (error){
         this.error = error;
         this.loading = false;
+        location.reload();// deze moet weg
       }
   }
 }

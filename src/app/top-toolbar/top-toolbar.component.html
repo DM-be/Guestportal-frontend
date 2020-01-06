@@ -5,6 +5,7 @@
         <span class="align-center"></span>
         <span class="example-spacer"></span>
         <button mat-button routerLink="/">Home</button>
+        <button mat-button routerLink="/admin" *ngIf="(currentUser | json) == 'null' ">Login</button>
         <button mat-button (click)="logout()" *ngIf="currentUser">Logout</button>
         <button mat-button routerLink="/admin">Admin</button>
         <button mat-button>About</button>

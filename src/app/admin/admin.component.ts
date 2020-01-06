@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { User } from '../models/user';
+import { AdminUser } from '../models/AdminUser';
 import { UserService ,AuthenticationService} from '../services';
 
 @Component({
@@ -11,8 +11,8 @@ import { UserService ,AuthenticationService} from '../services';
 })
 export class AdminComponent implements OnInit {
   loading = false;
-  users: User[];
-  currentUser: User;
+  users: AdminUser[];
+  currentUser: AdminUser;
   title = 'Admin'
   constructor(
     private router: Router,
@@ -20,6 +20,7 @@ export class AdminComponent implements OnInit {
     private userService: UserService
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    
   }
 
   ngOnInit() {

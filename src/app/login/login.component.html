@@ -13,12 +13,8 @@
               </mat-error>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required (keyup.enter)="login()">
+                <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required (keyup.enter)="login()">
               </mat-form-field>
-
-
-      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-
     <mat-card-actions>
       <button mat-raised-button (click)="login()" color="primary" >Login</button>
       <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>

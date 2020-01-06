@@ -5,7 +5,7 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { SelfRegisterComponent } from './self-register/self-register.component';
 
-const Routes: Routes = [
+const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'self-register', component: SelfRegisterComponent },
   { path: 'login', component: LoginComponent },
@@ -13,10 +13,11 @@ const Routes: Routes = [
     redirectTo: '/self-register',
     pathMatch: 'full'
   },
+  { path: '**', component: SelfRegisterComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(Routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

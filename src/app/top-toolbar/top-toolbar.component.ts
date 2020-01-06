@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {  AuthenticationService} from '../services';
-import { User } from '../models/user';
+import { AdminUser } from '../models/AdminUser';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-top-toolbar',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./top-toolbar.component.css']
 })
 export class TopToolbarComponent implements OnInit {
-  currentUser: User;
+  currentUser: AdminUser;
   @Input() title:string;
   constructor(private authenticationService: AuthenticationService, private router: Router) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
@@ -19,6 +19,5 @@ export class TopToolbarComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
-    this.router.navigate(['/login']);
   }
 }

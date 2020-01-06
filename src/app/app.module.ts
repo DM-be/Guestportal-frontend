@@ -13,9 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 // authenticatie
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// used to create fake backend
-import { fakeBackendProvider } from './helpers/fake-backend';
-
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 
