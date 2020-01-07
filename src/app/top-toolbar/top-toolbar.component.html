@@ -1,16 +1,22 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
+  <mat-toolbar-row>
     <span>{{title}}</span>
-        <span class="fill-remaining-space"></span>
-        <span class="align-center"></span>
-        <span class="example-spacer"></span>
-        <button mat-button routerLink="/">Home</button>
-        <button mat-button routerLink="/admin" *ngIf="(currentUser | json) == 'null' ">Login</button>
-        <button mat-button (click)="logout()" *ngIf="currentUser">Logout</button>
-        <button mat-button routerLink="/admin">Admin</button>
-        <button mat-button>About</button>
-        <button mat-button>Contact</button>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
+    <span class="fill-remaining-space"></span>
+    <span class="align-center"></span>
+    <span class="example-spacer"></span>
+    <button mat-button routerLink="/">Home</button>
+    <button
+      mat-button
+      routerLink="/admin"
+      *ngIf="(currentUser | json) == 'null' "
+    >
+      Login
+    </button>
+    <button mat-button (click)="logout()" *ngIf="currentUser">Logout</button>
+    <button mat-button routerLink="/admin">Admin</button>
+    <button mat-button>About</button>
+    <button mat-button>Contact</button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
@@ -27,4 +33,5 @@
         <span>Disable alerts</span>
       </button>
     </mat-menu>
-</mat-toolbar-row>
+  </mat-toolbar-row>
+</mat-toolbar>

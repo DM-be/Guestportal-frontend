@@ -1,22 +1,40 @@
 <app-top-toolbar [title]="title"></app-top-toolbar>
 <div class="example-container">
-    <mat-card-header>
-      <mat-card-title>Login with   Username: a@a.be     password: Vergeten123!</mat-card-title>
-    </mat-card-header>
-              <mat-form-field class="example-full-width">
-              <input matInput placeholder="Username" [(ngModel)]="username" name="username"  [formControl]="emailFormControl">
-              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                Please enter a valid email address
-              </mat-error>
-              <mat-error *ngIf="emailFormControl.hasError('required')">
-                Username is <strong>required</strong>
-              </mat-error>
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required (keyup.enter)="login()">
-              </mat-form-field>
-    <mat-card-actions>
-      <button mat-raised-button (click)="login()" color="primary" >Login</button>
-      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-    </mat-card-actions>
+  <mat-card-header>
+    <mat-card-title
+      >Login with Username: a@a.be password: Vergeten123!</mat-card-title
+    >
+  </mat-card-header>
+  <mat-form-field class="example-full-width">
+    <input
+      matInput
+      placeholder="Username"
+      [(ngModel)]="username"
+      name="username"
+      [formControl]="emailFormControl"
+    />
+    <mat-error
+      *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')"
+    >
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Username is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input
+      matInput
+      placeholder="Password"
+      [(ngModel)]="password"
+      type="password"
+      name="password"
+      required
+      (keyup.enter)="login()"
+    />
+  </mat-form-field>
+  <mat-card-actions>
+    <button mat-raised-button (click)="login()" color="primary">Login</button>
+    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+  </mat-card-actions>
 </div>

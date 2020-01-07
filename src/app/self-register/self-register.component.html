@@ -1,38 +1,45 @@
 <app-top-toolbar [title]="title"></app-top-toolbar>
-
 <div class="example-container">
-    <mat-form-field>
-      <input matInput placeholder="First name">
-    </mat-form-field>
-    <mat-form-field>
-            <input matInput placeholder="Last name">
-          </mat-form-field>
-          <mat-form-field>
-                <input matInput placeholder="Email" [formControl]="emailFormControl">
-                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                  Please enter a valid email address
-                </mat-error>
-                <mat-error *ngIf="emailFormControl.hasError('required')">
-                  Email is <strong>required</strong>
-                </mat-error>
-              </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Visiter" aria-label="Visiter" [matAutocomplete]="auto" [formControl]="activeDirectoryUsersFormControl">
-                    <mat-autocomplete #auto="matAutocomplete">
-                      <mat-option *ngFor="let user of filteredActiveDirectoryUsers | async" [value]="user.name">
-                        <span>{{user.name}}</span>
-                      </mat-option>
-                    </mat-autocomplete>
-                  </mat-form-field>
-
-                  <mat-vertical-stepper>
-                    <mat-step label="Step 1">
-                      Content 1
-                    </mat-step>
-                    <mat-step label="Step 1">
-                      Content 2
-                    </mat-step>
-                  </mat-vertical-stepper>
-
-  </div>
+  <mat-form-field>
+    <input matInput placeholder="First name" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Last name" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Email" [formControl]="emailFormControl" />
+    <mat-error
+      *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')"
+    >
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input
+      matInput
+      placeholder="Visiter"
+      aria-label="Visiter"
+      [matAutocomplete]="auto"
+      [formControl]="activeDirectoryUsersFormControl"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let user of filteredActiveDirectoryUsers | async"
+        [value]="user.name"
+      >
+        <span>{{user.name}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-vertical-stepper>
+    <mat-step label="Step 1">
+      Content 1
+    </mat-step>
+    <mat-step label="Step 1">
+      Content 2
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TopToolbarComponent } from './top-toolbar.component';
+import { TopToolbarComponent } from "./top-toolbar.component";
 
-describe('TopToolbarComponent', () => {
+describe("TopToolbarComponent", () => {
   let component: TopToolbarComponent;
   let fixture: ComponentFixture<TopToolbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopToolbarComponent ]
-    })
-    .compileComponents();
+      declarations: [TopToolbarComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('TopToolbarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

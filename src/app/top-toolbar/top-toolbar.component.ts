@@ -1,21 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {  AuthenticationService} from '../services';
-import { AdminUser } from '../models/AdminUser';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input } from "@angular/core";
+import { AuthenticationService } from "../services";
+import { AdminUser } from "../models/AdminUser";
+import { Router } from "@angular/router";
 @Component({
-  selector: 'app-top-toolbar',
-  templateUrl: './top-toolbar.component.html',
-  styleUrls: ['./top-toolbar.component.css']
+  selector: "app-top-toolbar",
+  templateUrl: "./top-toolbar.component.html",
+  styleUrls: ["./top-toolbar.component.css"]
 })
 export class TopToolbarComponent implements OnInit {
   currentUser: AdminUser;
-  @Input() title:string;
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  @Input() title: string;
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) {
+    this.authenticationService.currentUser.subscribe(
+      x => (this.currentUser = x)
+    );
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   logout() {
     this.authenticationService.logout();

@@ -1,12 +1,12 @@
 <app-top-toolbar [title]="title"></app-top-toolbar>
-<div class="card mt-4"  *ngIf="currentUser">
-  <h4 >Wlecome : {{ currentUser.username }}</h4>
-  <h4 class="card-header" >You're logged in with Angular 8 & JWT!!</h4>
+<div class="card mt-4" *ngIf="currentUser">
+  <h4>Wlecome : {{ currentUser.username }}</h4>
+  <h4 class="card-header">You're logged in with Angular 8 & JWT!!</h4>
   <div class="card-body">
-      <h6>Users from secure api end point</h6>
-      <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-      <ul *ngIf="users">
-          <li *ngFor="let user of users">{{user.username}} </li>
-      </ul>
+    <h6>Users from secure api end point</h6>
+    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+    <ul *ngIf="users">
+      <li *ngFor="let user of users">{{user.username}}</li>
+    </ul>
   </div>
 </div>
