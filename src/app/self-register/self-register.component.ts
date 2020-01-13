@@ -2,11 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import { ActiveDirectoryUser } from "../models/ActiveDirectoryUser";
 import { Observable } from "rxjs";
-
 import { map, startWith } from "rxjs/operators";
 import { EidUser } from "../models/EidUser";
-import { IseService, WebSocketService } from "../services";
-
+import { IseService } from "../services/ise.service";
+import { WebSocketService } from "../services/web-socket.service";
 @Component({
   selector: "app-self-register",
   templateUrl: "./self-register.component.html",
@@ -19,9 +18,7 @@ export class SelfRegisterComponent implements OnInit {
   ]);
   title = "Self registration";
   activeDirectoryUsersFormControl = new FormControl();
-
   activeDirectoryUsers: ActiveDirectoryUser[];
-
   filteredActiveDirectoryUsers: Observable<ActiveDirectoryUser[]>;
 
   constructor(

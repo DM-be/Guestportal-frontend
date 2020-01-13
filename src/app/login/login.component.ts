@@ -1,4 +1,3 @@
-// Onnodige imports wegdoen
 // Onnodige variabelen wegdoen
 // ngOnInit() return url is dat nodig
 // get f() is dit nodig
@@ -12,9 +11,7 @@ import { FormControl } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { first } from "rxjs/operators";
-import { MatDialog } from "@angular/material";
-import { AuthenticationService } from "../services";
+import { AuthenticationService } from "../services/authentication.service";
 
 @Component({
   selector: "app-login",
@@ -23,9 +20,6 @@ import { AuthenticationService } from "../services";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
   error = "";
   title = "Login";
   username: string;
@@ -40,6 +34,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
+    this.username = "a@a.be"
+    this.password = "Vergeten123!"
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue != null) {
       this.router.navigate(["/admin"]);
@@ -47,8 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
+
   }
 
   // convenience getter for easy access to form fields
@@ -57,8 +52,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.submitted = true;
-    this.loading = true;
+    this.username = "a@a.be"
+    this.password = "Vergeten123!"
     try {
       let loginUser: CreateUserDTO = {
         email: this.username,
@@ -66,10 +61,12 @@ export class LoginComponent implements OnInit {
       };
       this.authenticationService.login(loginUser);
       this.router.navigate(["/admin"]);
+      console.log('authenticated')
       location.reload();
+      console.log('reloaded')
     } catch (error) {
       this.error = error;
-      this.loading = false;
+      console.log('not logged in')
       location.reload(); // deze moet weg
     }
   }

@@ -12,7 +12,7 @@
       [(ngModel)]="username"
       name="username"
       [formControl]="emailFormControl"
-    />
+    >
     <mat-error
       *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')"
     >
