@@ -2,4 +2,25 @@
 <app-top-toolbar></app-top-toolbar>
 
 
-<p>login works!</p>
+<div class="example-container">
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        placeholder="email"
+        [(ngModel)]="loginUserDto.email"
+        name="email"
+      >
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        placeholder="Password"
+        [(ngModel)]="loginUserDto.password"
+        type="password"
+        name="password"
+      />
+    </mat-form-field>
+   
+      <button mat-raised-button (click)="login()" color="primary">Login</button>
+ 
+  </div>
