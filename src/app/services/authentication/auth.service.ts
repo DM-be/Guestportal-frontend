@@ -17,11 +17,11 @@ export class AuthService {
   public async authenticateUser(loginUserDto: LoginUserDto) {
     try {
       const adminUser = await this.login(loginUserDto);
-      console.log(adminUser);
-      if ((x): x is AdminUser => x.hasOwnProperty("email")) {
+  
+      if (this.instanceOfAdminUser(adminUser)) {
         this.saveAdminUserToLocalStorage(adminUser as AdminUser);
+        console.log(adminUser);
       }
-      console.log(adminUser);
     } catch (error) {
       console.log("error in authenticating admin user", error);
     }
@@ -61,4 +61,8 @@ export class AuthService {
       console.log(error);
     }
   }
+
+   instanceOfAdminUser(object: any): object is AdminUser {
+    return 'email' in object;
+}
 }
