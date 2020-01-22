@@ -22,7 +22,9 @@ import {
    MatMenuModule,
    MatAutocomplete,
    MatAutocompleteModule,
-   MatStepperModule
+   MatStepperModule,
+   MatSnackBar,
+   MatSnackBarModule
 } from '@angular/material';
 
 @NgModule({
@@ -47,7 +49,8 @@ import {
       MatPaginatorModule,
       MatMenuModule,
       MatAutocompleteModule,
-      MatStepperModule
+      MatStepperModule,
+      MatSnackBarModule
    ],
    exports: [
       MatButtonModule,
@@ -68,7 +71,8 @@ import {
       MatPaginatorModule,
       MatMenuModule,
       MatAutocompleteModule,
-      MatStepperModule
+      MatStepperModule,
+      MatSnackBarModule
    ],
    providers: [
       MatDatepickerModule,

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { LoginUserDto } from "../models/LoginUser.dto";
 import { AuthService } from "../services/authentication/auth.service";
 import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-login",
@@ -14,19 +15,21 @@ export class LoginComponent implements OnInit {
     password: ""
   };
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {}
 
   public async login() {
     try {
       await this.authService.authenticateUser(this.loginUserDto);
-      if(this.authService.adminUser)
-      {
+      if (this.authService.adminUser) {
         await this.router.navigate(["/admin"]);
-      }
-      else {
-        console.log('invalid user');
+      } else {
+        await this.snackBar.open("invalid user");
       }
     } catch (error) {
       console.log(error);
