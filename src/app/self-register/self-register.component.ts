@@ -19,9 +19,13 @@ export class SelfRegisterComponent implements OnInit {
     Validators.email
   ]);
 
+  nameFormControl = new FormControl();
+
   private createGuestUserDto: CreateGuestUserDto;
 
-  activeDirectoryUsersFormControl = new FormControl();
+  activeDirectoryUsersFormControl = new FormControl("", [
+    Validators.required,
+  ]);
 
   activeDirectoryUsers: ActiveDirectoryUser[];
 

@@ -1,9 +1,24 @@
 <app-top-toolbar></app-top-toolbar>
 
 <div class="example-container">
-  <mat-vertical-stepper>
-    <mat-step label="Insert your ID card into the EID reader"> </mat-step>
-    <mat-step label="Enter additional information">
+  <mat-vertical-stepper linear>
+    <mat-step label="Insert your ID card into the EID reader">
+      <mat-form-field>
+        <input matInput placeholder="First Name" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Last Name" />
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="Enter your email address"  [stepControl]="emailFormControl">
+      <ng-template matStepperIcon="email">
+        <mat-icon>email</mat-icon>
+      </ng-template>
       <mat-form-field>
         <input matInput placeholder="Email" [formControl]="emailFormControl" />
         <mat-error
@@ -18,11 +33,16 @@
           Email is <strong>required</strong>
         </mat-error>
       </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="Who are you visiting?" [stepControl]="activeDirectoryUsersFormControl">
       <mat-form-field class="example-full-width">
         <input
           matInput
-          placeholder="Visiter"
-          aria-label="Visiter"
+          placeholder="Visitee"
+          aria-label="Visitee"
           [matAutocomplete]="auto"
           [formControl]="activeDirectoryUsersFormControl"
         />
@@ -35,6 +55,10 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
     </mat-step>
     <mat-step label="Enjoy guest access!"> </mat-step>
   </mat-vertical-stepper>

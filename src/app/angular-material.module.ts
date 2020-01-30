@@ -24,7 +24,8 @@ import {
    MatAutocompleteModule,
    MatStepperModule,
    MatSnackBar,
-   MatSnackBarModule
+   MatSnackBarModule,
+   MatCardModule
 } from '@angular/material';
 
 @NgModule({
@@ -50,7 +51,8 @@ import {
       MatMenuModule,
       MatAutocompleteModule,
       MatStepperModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatCardModule
    ],
    exports: [
       MatButtonModule,
@@ -72,7 +74,8 @@ import {
       MatMenuModule,
       MatAutocompleteModule,
       MatStepperModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatCardModule
    ],
    providers: [
       MatDatepickerModule,

@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../services/authentication/auth.service";
 
 @Component({
-  selector: 'app-top-toolbar',
-  templateUrl: './top-toolbar.component.html',
-  styleUrls: ['./top-toolbar.component.css']
+  selector: "app-top-toolbar",
+  templateUrl: "./top-toolbar.component.html",
+  styleUrls: ["./top-toolbar.component.css"]
 })
 export class TopToolbarComponent implements OnInit {
+  constructor(private authService: AuthService) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  isLoggedIn() {
+    return (
+      this.authService.getAdminUserFromLocalStorage() &&
+      !this.authService.isTokenExpired()
+    );
   }
-
 }
