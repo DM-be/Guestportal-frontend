@@ -16,7 +16,8 @@ export class GuestUsersSocket extends Socket {
       options: {
         query: {
           token: authService.getAdminUserFromLocalStorage().tokenResponse.token
-        }
+        },
+        transports: ["websocket", "polling"]
       }
     });
   }
