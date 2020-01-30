@@ -1,4 +1,6 @@
+import { TokenResponse } from './TokenResponse';
+
 export interface AdminUser {
   email: string;
-  token: string;
+  tokenResponse?: TokenResponse;
 }

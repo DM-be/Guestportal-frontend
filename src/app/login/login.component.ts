@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     try {
       await this.authService.authenticateUser(this.loginUserDto);
       if (this.authService.adminUser) {
+        console.log('succes')
         await this.router.navigate(["/admin"]);
       } else {
         await this.snackBar.open("invalid user");
