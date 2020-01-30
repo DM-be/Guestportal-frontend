@@ -15,10 +15,25 @@ th {
 .example-container {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 .example-container > * {
-  width: 50%;
+  width: 80%;
   margin: auto;
   padding-top: 20px;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+
+.from{
+  flex: 0 0 100px;
+}
+.to{
+  flex: 0 0 100px;
 }

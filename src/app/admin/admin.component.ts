@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { GuestUsersService } from "../services/guest-users/guest-users.service";
 import { MatTableDataSource, MatPaginator, MatSort } from "@angular/material";
 import { GuestUserModel } from "../models/GuestUserModel";
-import { BehaviorSubject, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { DataSource } from "@angular/cdk/table";
+import * as moment from "moment";
 
 @Component({
   selector: "app-admin",
@@ -12,8 +13,8 @@ import { DataSource } from "@angular/cdk/table";
 })
 export class AdminComponent implements OnInit {
   displayedColumns: string[] = [
-    "first name",
-    "last name",
+    "firstName",
+    "lastName",
     "from",
     "to",
     "visiting",
@@ -27,13 +28,20 @@ export class AdminComponent implements OnInit {
 
   constructor(private guestUsersService: GuestUsersService) {
     this.dataSource = new GuestUserDataSource(this.guestUsersService);
-
-    const source = new MatTableDataSource();
   }
   ngOnInit() {}
 
   async removeUser(guestUser: GuestUserModel) {
     await this.guestUsersService.removeGuestUser(guestUser);
+  }
+
+  public formatDateStringFrom(guestUser: GuestUserModel) {
+    return moment(guestUser.fromDate).fromNow();
+  }
+
+
+  public formatDateStringTo(guestUser: GuestUserModel) {
+    return moment(guestUser.toDate).fromNow();
   }
 }
 
