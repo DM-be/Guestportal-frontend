@@ -2,19 +2,23 @@ import { Injectable } from "@angular/core";
 import { Socket } from "ngx-socket-io";
 import { Observable } from "rxjs";
 import { GuestUserModel } from "src/app/models/GuestUserModel";
-const GUEST_USER_OPTIONS = {
-  query: {
-    token: "testtoken!"
-  }
-};
-const URL = "http://localhost:3002";
+import { AuthService } from "src/app/services/authentication/auth.service";
+
+const URL = "http://localhost:5002";
 const DATABASECHANGES = "guestUserDatabaseChange";
 const REMOVE_GUEST_USER = "removeUser";
 
 @Injectable()
 export class GuestUsersSocket extends Socket {
-  constructor() {
-    super({ url: URL, options: GUEST_USER_OPTIONS });
+  constructor(private authService: AuthService) {
+    super({
+      url: URL,
+      options: {
+        query: {
+          token: authService.getAdminUserFromLocalStorage().tokenResponse.token
+        }
+      }
+    });
   }
 
   public databaseChangesSubscription(): Observable<GuestUserModel[]> {

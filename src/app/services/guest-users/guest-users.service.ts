@@ -5,7 +5,7 @@ import { GuestUserModel } from "../../models/GuestUserModel";
 import { GuestUsersSocket } from "src/app/modules/sockets/GuestUsersSocket";
 import Axios, { AxiosResponse } from "axios";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "http://localhost:5000";
 
 @Injectable({
   providedIn: "root"
