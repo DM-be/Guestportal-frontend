@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { EidUser } from "src/app/models/EidUser";
 
-const URL = "http://localhost:3001";
+const URL = "http://localhost:5001";
 const READ_CARD_EVENT = "readCardDataEvent";
 
 @Injectable()
