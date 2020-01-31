@@ -10,7 +10,8 @@ import { CreateGuestUserDto } from "../models/CreateGuestUserDto";
 import { BackendService } from "../services/backend/backend.service";
 import { EidService } from "../services/eid/eid.service";
 import { NotificationService } from "../services/notification.service";
-import { MatStepper } from "@angular/material";
+import { MatStepper, MatStepperNext } from "@angular/material";
+import { GuestUsersService } from "../services/guest-users/guest-users.service";
 
 @Component({
   selector: "app-self-register",
@@ -26,7 +27,10 @@ export class SelfRegisterComponent implements OnInit {
   enterManually = false;
   showManualButton = true;
 
-  @ViewChild("namesStep", undefined) private namesStep: MatStepper;
+  @ViewChild("namesStep", undefined) private namesStep: MatStepperNext;
+
+  @ViewChild("stepper", undefined) private stepper: MatStepper;
+
 
   nameFormControl = new FormControl();
 
@@ -45,7 +49,8 @@ export class SelfRegisterComponent implements OnInit {
     private iseService: IseService,
     private backendService: BackendService,
     private eidService: EidService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private guestUserService: GuestUsersService
   ) {}
 
   async ngOnInit() {
@@ -93,7 +98,7 @@ export class SelfRegisterComponent implements OnInit {
 
   private goForwardAfterNamesEidEvent() {
     try {
-      this.namesStep.next();
+      this.namesStep._stepper.next();
     } catch (error) {
       console.log(error);
     }
@@ -110,8 +115,19 @@ export class SelfRegisterComponent implements OnInit {
     }
   }
 
-  requestGuestAccess() {
+  private async sendGuestAccessNotification() {
+    try {
+      await this.notificationService.showNotification(
+        `You now have access to the guest network ${this.firstNameFormControl.value}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async requestGuestAccess() {
     //TODO: formatting email/name in form?
+    //TODO: extra validation, restrict only to list?
 
     const createGuestUserDto: CreateGuestUserDto = {
       firstName: this.firstNameFormControl.value,
@@ -121,7 +137,27 @@ export class SelfRegisterComponent implements OnInit {
       reasonForVisit: this.reasonForVisitFormControl.value,
       emailAddress: this.emailFormControl.value
     };
+    try {
+      //     await this.guestUserService.createGuestUser(createGuestUserDto);
+      await this.sendGuestAccessNotification();
+      this.resetForm();
+    } catch (error) {
+      console.log(error);
+    }
 
-    // send dto to backend api
+
+  }
+
+  private resetForm() {
+    this.firstNameFormControl.setValue("");
+    this.lastNameFormControl.setValue("");
+    this.activeDirectoryUsersFormControl.setValue("");
+    this.passwordFormControl.setValue("");
+    this.reasonForVisitFormControl.setValue("");
+    this.emailFormControl.setValue("");
+    this.enterManually = false;
+    this.showManualButton = true;
+    this.stepper.reset();
+
   }
 }
