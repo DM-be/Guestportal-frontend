@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-
-import { Observable, BehaviorSubject } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { GuestUserModel } from "../../models/GuestUserModel";
 import { GuestUsersSocket } from "src/app/modules/sockets/GuestUsersSocket";
 import Axios, { AxiosResponse } from "axios";
+import { CreateGuestUserDto } from "src/app/models/CreateGuestUserDto";
 
 const BASE_URL = "http://localhost:5000";
 
@@ -19,7 +19,6 @@ export class GuestUsersService {
       .databaseChangesSubscription()
       .subscribe((guestUserModels: GuestUserModel[]) => {
         if (guestUserModels) {
-          console.log(guestUserModels);
           this.guestUsers$.next(guestUserModels);
         }
       });
@@ -52,6 +51,20 @@ export class GuestUsersService {
       return axiosResponse.data as GuestUserModel[];
     } catch (error) {
       console.log("could not get guestusers users ", error);
+    }
+  }
+
+  public async createGuestUser(
+    createGuestUserDto: CreateGuestUserDto
+  ): Promise<void> {
+    try {
+      const url = `${BASE_URL}/guest-user/`;
+      const axiosResponse: AxiosResponse = await Axios.post(
+        url,
+        createGuestUserDto
+      );
+    } catch (error) {
+      console.log(error);
     }
   }
 }
