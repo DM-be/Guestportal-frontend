@@ -1,14 +1,18 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-    <span>Guest-portal-login</span>
+        <div class="navbar-brand">
+            <a class="navbar-item">
+              <img src="assets/spotit_color.png" class="small">
+            </a>
+          </div>
         <span class="fill-remaining-space"></span>
         <span class="align-center"></span>
         <span class="example-spacer"></span>
        
-        <button mat-button routerLink="/self-register">Guest access</button>
+        <button mat-button routerLink="/self-register">GUEST ACCESS</button>
         <div *ngIf="isLoggedIn(); then thenBlock else elseBlock"></div>
-        <ng-template #thenBlock> <button mat-button routerLink="/admin">Guests</button></ng-template>
-        <ng-template #elseBlock> <button mat-button routerLink="/login">Login</button></ng-template>
+        <ng-template #thenBlock> <button mat-button routerLink="/admin">GUESTS</button></ng-template>
+        <ng-template #elseBlock> <button mat-button routerLink="/login">LOGIN</button></ng-template>
         <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -26,5 +30,8 @@
         <span>Disable alerts</span>
       </button>
     </mat-menu>
-</mat-toolbar-row>
     
+</mat-toolbar-row>
+
+</mat-toolbar>
+<mat-divider></mat-divider>

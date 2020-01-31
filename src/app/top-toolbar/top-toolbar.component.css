@@ -3,3 +3,9 @@
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
   }
+
+
+  .small {
+     width: 70%;
+     height: 70%;
+  }
