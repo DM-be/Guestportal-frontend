@@ -31,7 +31,6 @@ export class SelfRegisterComponent implements OnInit {
 
   @ViewChild("stepper", undefined) private stepper: MatStepper;
 
-
   nameFormControl = new FormControl();
 
   private createGuestUserDto: CreateGuestUserDto;
@@ -144,8 +143,6 @@ export class SelfRegisterComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
-
-
   }
 
   private resetForm() {
@@ -158,6 +155,5 @@ export class SelfRegisterComponent implements OnInit {
     this.enterManually = false;
     this.showManualButton = true;
     this.stepper.reset();
-
   }
 }

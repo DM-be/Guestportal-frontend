@@ -1,15 +1,23 @@
 import { Injectable, ɵConsole } from "@angular/core";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar, MatSnackBarConfig } from "@angular/material";
 
 @Injectable({
   providedIn: "root"
 })
 export class NotificationService {
-  constructor(private snackBar: MatSnackBar) {}
+  private matSnackbarConfig: MatSnackBarConfig;
+  constructor(private snackBar: MatSnackBar) {
+    this.matSnackbarConfig = {
+      horizontalPosition: "right",
+      verticalPosition: "top",
+      duration: 1000
+    };
+    //TODO: add support for green(success and red-> no succes)
+  }
 
   public async showNotification(message: string): Promise<void> {
     try {
-      await this.snackBar.open(message, undefined); // todo add color - centering in snackbar config
+      this.snackBar.open(message, undefined, this.matSnackbarConfig); // todo add color - centering in snackbar config
     } catch (error) {
       console.log(error);
     }
