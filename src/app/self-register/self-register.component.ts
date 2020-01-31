@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import { ActiveDirectoryUser } from "../models/ActiveDirectoryUser";
 import { Observable } from "rxjs";
@@ -7,6 +7,10 @@ import { map, startWith } from "rxjs/operators";
 import { EidUser } from "../models/EidUser";
 import { IseService } from "../services/ise.service";
 import { CreateGuestUserDto } from "../models/CreateGuestUserDto";
+import { BackendService } from "../services/backend/backend.service";
+import { EidService } from "../services/eid/eid.service";
+import { NotificationService } from "../services/notification.service";
+import { MatStepper } from "@angular/material";
 
 @Component({
   selector: "app-self-register",
@@ -19,24 +23,36 @@ export class SelfRegisterComponent implements OnInit {
     Validators.email
   ]);
 
+  enterManually = false;
+  showManualButton = true;
+
+  @ViewChild("namesStep", undefined) private namesStep: MatStepper;
+
   nameFormControl = new FormControl();
 
   private createGuestUserDto: CreateGuestUserDto;
 
-  activeDirectoryUsersFormControl = new FormControl("", [
-    Validators.required,
-  ]);
+  activeDirectoryUsersFormControl = new FormControl("", [Validators.required]);
+  firstNameFormControl = new FormControl("", [Validators.required]);
+  lastNameFormControl = new FormControl("", [Validators.required]);
+  passwordFormControl = new FormControl("", [Validators.required]);
+  reasonForVisitFormControl = new FormControl("", [Validators.required]);
 
   activeDirectoryUsers: ActiveDirectoryUser[];
-
   filteredActiveDirectoryUsers: Observable<ActiveDirectoryUser[]>;
 
-  constructor(private iseService: IseService) {}
+  constructor(
+    private iseService: IseService,
+    private backendService: BackendService,
+    private eidService: EidService,
+    private notificationService: NotificationService
+  ) {}
 
   async ngOnInit() {
     this.activeDirectoryUsers = await this.iseService.getActiveDirectoryUsers();
     this.pipeFilteredActiveDirectoryUsers();
     this.createGuestUserDto = new CreateGuestUserDto();
+    this.listenToEidEvents();
   }
 
   private pipeFilteredActiveDirectoryUsers() {
@@ -48,17 +64,6 @@ export class SelfRegisterComponent implements OnInit {
           : this.activeDirectoryUsers.slice()
       )
     );
-    // this.webSocketService
-    //   .listenToEidUserEvent()
-    //   .subscribe((eidUser: EidUser) => {
-    //     this.createGuestUserDto.firstName = eidUser.firstNames[0];
-    //     this.createGuestUserDto.surName = eidUser.surName;
-    //   });
-  }
-
-  public sendCreatUserDto() {
-    this.createGuestUserDto.password = ""; // formcontrol password
-    this.createGuestUserDto.personBeingVisited = "";
   }
 
   private filterActiveDirectoryUsers(value: string): ActiveDirectoryUser[] {
@@ -68,5 +73,55 @@ export class SelfRegisterComponent implements OnInit {
       (adUser: ActiveDirectoryUser) =>
         adUser.name.toLowerCase().indexOf(filterValue) === 0
     );
+  }
+
+  public toggleManualButton() {
+    this.enterManually = !this.enterManually;
+    this.showManualButton = false;
+  }
+
+  private listenToEidEvents() {
+    this.eidService.eidUserSubject.subscribe((eidUser: EidUser) => {
+      if (eidUser) {
+        this.firstNameFormControl.setValue(eidUser.firstNames[0]);
+        this.lastNameFormControl.setValue(eidUser.surName);
+        this.showSuccessEidNotification();
+        this.goForwardAfterNamesEidEvent();
+      }
+    });
+  }
+
+  private goForwardAfterNamesEidEvent() {
+    try {
+      this.namesStep.next();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async showSuccessEidNotification() {
+    try {
+      //TODO: better text
+      await this.notificationService.showNotification(
+        `Thanks ${this.firstNameFormControl.value}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  requestGuestAccess() {
+    //TODO: formatting email/name in form?
+
+    const createGuestUserDto: CreateGuestUserDto = {
+      firstName: this.firstNameFormControl.value,
+      surName: this.lastNameFormControl.value,
+      personBeingVisited: this.activeDirectoryUsersFormControl.value,
+      password: this.passwordFormControl.value,
+      reasonForVisit: this.reasonForVisitFormControl.value,
+      emailAddress: this.emailFormControl.value
+    };
+
+    // send dto to backend api
   }
 }

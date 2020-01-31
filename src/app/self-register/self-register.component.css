@@ -8,3 +8,14 @@
     margin: auto;
     padding-top: 20px;
   }
+
+
+  .example-full-width {
+    width: 70%;
+
+  }
+  
+  td {
+    padding-right: 8px;
+  }
+  
