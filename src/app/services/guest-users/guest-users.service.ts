@@ -4,8 +4,7 @@ import { GuestUserModel } from "../../models/GuestUserModel";
 import { GuestUsersSocket } from "src/app/modules/sockets/GuestUsersSocket";
 import Axios, { AxiosResponse } from "axios";
 import { CreateGuestUserDto } from "src/app/models/CreateGuestUserDto";
-
-const BASE_URL = "http://localhost:5000";
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class GuestUsersService {
@@ -44,7 +43,7 @@ export class GuestUsersService {
 
   private async getGuestUsers(): Promise<GuestUserModel[]> {
     try {
-      const url = `${BASE_URL}/guest-user/`;
+      const url = `${environment.backend_url}/guest-user/`;
       let axiosResponse: AxiosResponse = await Axios.get(url);
       return axiosResponse.data as GuestUserModel[];
     } catch (error) {

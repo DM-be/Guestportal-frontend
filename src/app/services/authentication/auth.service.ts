@@ -5,8 +5,7 @@ import { AdminUser } from "src/app/models/AdminUser.dto";
 import { CustomError } from "src/app/models/CustomError";
 import { TokenResponse } from "src/app/models/TokenResponse";
 import { JwtHelperService } from "@auth0/angular-jwt";
-
-const BASE_URL = "http://localhost:5000";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: "root"
@@ -56,7 +55,7 @@ export class AuthService {
     loginUserDto: LoginUserDto
   ): Promise<AdminUser | CustomError> {
     try {
-      const url = `${BASE_URL}/auth/`;
+      const url = `${environment.backend_url}/auth/`;
       const axiosResponse: AxiosResponse = await Axios.post(url, loginUserDto); // 204
       if (axiosResponse.data.token) {
         const decodedToken: AdminUser = this.decodeToken(axiosResponse.data);
