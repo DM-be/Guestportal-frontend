@@ -25,7 +25,9 @@ import {
    MatStepperModule,
    MatSnackBar,
    MatSnackBarModule,
-   MatCardModule
+   MatCardModule,
+   MatCheckboxModule,
+   MatDialogModule
 } from '@angular/material';
 
 @NgModule({
@@ -53,6 +55,8 @@ import {
       MatStepperModule,
       MatSnackBarModule,
       MatCardModule,
+      MatCheckboxModule,
+      MatDialogModule
       
    ],
    exports: [
@@ -76,7 +80,9 @@ import {
       MatAutocompleteModule,
       MatStepperModule,
       MatSnackBarModule,
-      MatCardModule
+      MatCardModule,
+      MatCheckboxModule,
+      MatDialogModule
    ],
    providers: [
       MatDatepickerModule,

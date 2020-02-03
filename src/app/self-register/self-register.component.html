@@ -107,12 +107,22 @@
           </mat-form-field>
         </div>
         <div>
-          <button mat-button matStepperNext (click)="requestGuestAccess()">
+          <button mat-button matStepperNext>
             Next
           </button>
         </div>
       </mat-step>
-      <mat-step label="Enjoy guest access!"> </mat-step>
+      <mat-step label="Request access">
+        <div>
+            <mat-checkbox  (change)="updateCheckedTerms()">I agree to the <a (click)="openDialog()">terms and conditions</a></mat-checkbox>
+        </div>
+  
+
+        <div>
+          <button mat-raised-button color="primary" class="requestButton"(click)="requestGuestAccess()" [disabled]="!checkedTerms">REQUEST</button>
+        </div>
+      </mat-step>
+
     </mat-vertical-stepper>
   </div>
 

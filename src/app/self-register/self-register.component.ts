@@ -9,8 +9,9 @@ import { IseService } from "../services/ise.service";
 import { CreateGuestUserDto } from "../models/CreateGuestUserDto";
 import { EidService } from "../services/eid/eid.service";
 import { NotificationService } from "../services/notification.service";
-import { MatStepper, MatStepperNext } from "@angular/material";
+import { MatStepper, MatStepperNext, MatDialog } from "@angular/material";
 import { GuestUsersService } from "../services/guest-users/guest-users.service";
+import { TermsConditionsDialogComponent } from '../terms-conditions-dialog/terms-conditions-dialog.component';
 
 @Component({
   selector: "app-self-register",
@@ -25,6 +26,7 @@ export class SelfRegisterComponent implements OnInit {
 
   enterManually = false;
   showManualButton = true;
+  checkedTerms = false;
 
   @ViewChild("namesStep", undefined) private namesStep: MatStepperNext;
 
@@ -47,6 +49,7 @@ export class SelfRegisterComponent implements OnInit {
     private iseService: IseService,
     private eidService: EidService,
     private notificationService: NotificationService,
+    private dialog: MatDialog
   ) {}
 
   async ngOnInit() {
@@ -151,6 +154,22 @@ export class SelfRegisterComponent implements OnInit {
     this.emailFormControl.setValue("");
     this.enterManually = false;
     this.showManualButton = true;
+    this.checkedTerms = false;
     this.stepper.reset();
+  }
+
+    openDialog() {
+    const dialogRef = this.dialog.open(TermsConditionsDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+
+   
+  }
+
+  updateCheckedTerms() {
+    this.checkedTerms = !this.checkedTerms;
+    console.log(this.checkedTerms);
   }
 }

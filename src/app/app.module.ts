@@ -11,18 +11,15 @@ import { AngularMaterialModule } from "./angular-material.module";
 import { TopToolbarComponent } from "./top-toolbar/top-toolbar.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SocketsModule } from "./modules/sockets/sockets.module";
-import { SocketIoModule } from 'ngx-socket-io';
-import { EidReaderSocket } from './modules/sockets/EidReaderSocket';
-import { GuestUsersSocket } from './modules/sockets/GuestUsersSocket';
-import { LayoutModule } from './modules/layout/layout/layout.module';
-import { FooterComponent } from './footer/footer.component';
+import { SocketIoModule } from "ngx-socket-io";
+import { EidReaderSocket } from "./modules/sockets/EidReaderSocket";
+import { GuestUsersSocket } from "./modules/sockets/GuestUsersSocket";
+import { LayoutModule } from "./modules/layout/layout/layout.module";
+import { FooterComponent } from "./footer/footer.component";
+import { TermsConditionsDialogComponent } from "./terms-conditions-dialog/terms-conditions-dialog.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    SelfRegisterComponent,
-  ],
+  declarations: [AppComponent, LoginComponent, SelfRegisterComponent, TermsConditionsDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +31,7 @@ import { FooterComponent } from './footer/footer.component';
     LayoutModule
   ],
   providers: [GuestUsersSocket, EidReaderSocket],
+  entryComponents: [TermsConditionsDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
