@@ -9,10 +9,10 @@
         <span class="align-center"></span>
         <span class="example-spacer"></span>
        
-        <button mat-button routerLink="/self-register">GUEST ACCESS</button>
+        <button mat-button routerLink="/self-register">REQUEST ACCESS</button>
         <div *ngIf="isLoggedIn(); then thenBlock else elseBlock"></div>
         <ng-template #thenBlock> <button mat-button routerLink="/admin">GUESTS</button></ng-template>
-        <ng-template #elseBlock> <button mat-button routerLink="/login">LOGIN</button></ng-template>
+        <ng-template #elseBlock> <button mat-button routerLink="/login">GUESTS</button></ng-template>
         <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
