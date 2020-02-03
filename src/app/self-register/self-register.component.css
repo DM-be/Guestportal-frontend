@@ -1,22 +1,23 @@
 .example-container {
   flex: 1;
-  }
-  
-  .example-container > * {
-    width: 50%;
-    margin: auto;
-    margin-top: 0;
-    padding-top: 20px;
-  }
+}
 
+.example-container > * {
+  width: 50%;
+  margin: auto;
+  margin-top: 0;
+  padding-top: 20px;
+}
 
-  .example-full-width {
-    width: 70%;
+.example-full-width {
+  width: 70%;
+}
 
-  }
-  
-  td {
-    padding-right: 8px;
-  }
-  
+td {
+  padding-right: 8px;
+}
 
+::ng-deep snack-bar-container.successPanel {
+  background-color:  #AED581; /*#008cb1; */
+  color: white;
+}

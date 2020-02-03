@@ -8,9 +8,10 @@ export class NotificationService {
   private matSnackbarConfig: MatSnackBarConfig;
   constructor(private snackBar: MatSnackBar) {
     this.matSnackbarConfig = {
-      horizontalPosition: "right",
+      horizontalPosition: "center",
       verticalPosition: "top",
-      duration: 1000
+      duration: 1500,
+      panelClass: ['successPanel']
     };
     //TODO: add support for green(success and red-> no succes)
   }
