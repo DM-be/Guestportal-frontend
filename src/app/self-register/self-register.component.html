@@ -92,7 +92,7 @@
               *ngFor="let user of filteredActiveDirectoryUsers | async"
               [value]="user.email"
             >
-              <span>{{ user.name }}</span>
+              <span>{{ user.email }}</span>
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
