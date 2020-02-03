@@ -15,6 +15,7 @@ import { SocketIoModule } from 'ngx-socket-io';
 import { EidReaderSocket } from './modules/sockets/EidReaderSocket';
 import { GuestUsersSocket } from './modules/sockets/GuestUsersSocket';
 import { LayoutModule } from './modules/layout/layout/layout.module';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [

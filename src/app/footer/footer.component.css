@@ -1,0 +1,22 @@
+.fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+
+
+  .small {
+     width: 70%;
+     height: 70%;
+  }
+
+  img {
+      padding: 0;
+      margin:0;
+      display: flex;
+  }
+
+  mat-toolbar {
+      padding: 0;
+      margin: 0
+  }

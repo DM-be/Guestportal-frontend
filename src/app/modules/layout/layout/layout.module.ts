@@ -3,16 +3,17 @@ import { CommonModule } from '@angular/common';
 import { TopToolbarComponent } from 'src/app/top-toolbar/top-toolbar.component';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from 'src/app/footer/footer.component';
 
 
 
 @NgModule({
-  declarations: [TopToolbarComponent],
+  declarations: [TopToolbarComponent, FooterComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,
     RouterModule
   ],
-  exports: [TopToolbarComponent]
+  exports: [TopToolbarComponent, FooterComponent]
 })
 export class LayoutModule { }

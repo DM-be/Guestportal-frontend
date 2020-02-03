@@ -1,116 +1,120 @@
-<app-top-toolbar></app-top-toolbar>
+<main>
+  <app-top-toolbar></app-top-toolbar>
 
-<div class="example-container">
-  <mat-vertical-stepper linear #stepper>
-    <mat-step
-      label="Insert your ID card into the eID reader"
-      [stepControl]="lastNameFormControl"
-    >
-      <div *ngIf="enterManually">
-        <div>
-          <mat-form-field class="example-full-width">
-            <input
-              matInput
-              placeholder="First Name"
-              [formControl]="firstNameFormControl"
-            />
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="example-full-width">
-            <input
-              matInput
-              placeholder="Last Name"
-              [formControl]="lastNameFormControl"
-            />
-          </mat-form-field>
-        </div>
-        <div>
-          <button mat-button matStepperNext #namesStep>Next</button>
-        </div>
-      </div>
-      <button
-        (click)="toggleManualButton()"
-        mat-button
-        *ngIf="showManualButton"
+  <div class="example-container">
+    <mat-vertical-stepper linear #stepper>
+      <mat-step
+        label="Insert your ID card into the eID reader"
+        [stepControl]="lastNameFormControl"
       >
-        Enter manually
-      </button>
-    </mat-step>
-    <mat-step label="Enter account info" [stepControl]="emailFormControl">
-      <div>
+        <div *ngIf="enterManually">
+          <div>
+            <mat-form-field class="example-full-width">
+              <input
+                matInput
+                placeholder="First Name"
+                [formControl]="firstNameFormControl"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width">
+              <input
+                matInput
+                placeholder="Last Name"
+                [formControl]="lastNameFormControl"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-button matStepperNext #namesStep>Next</button>
+          </div>
+        </div>
+        <button
+          (click)="toggleManualButton()"
+          mat-button
+          *ngIf="showManualButton"
+        >
+          Enter manually
+        </button>
+      </mat-step>
+      <mat-step label="Enter account info" [stepControl]="emailFormControl">
+        <div>
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              placeholder="Email"
+              [formControl]="emailFormControl"
+            />
+            <mat-error
+              *ngIf="
+                emailFormControl.hasError('email') &&
+                !emailFormControl.hasError('required')
+              "
+            >
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              placeholder="Password"
+              [formControl]="passwordFormControl"
+              type="password"
+            />
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step
+        label="Reason for visit?"
+        [stepControl]="activeDirectoryUsersFormControl"
+      >
         <mat-form-field class="example-full-width">
           <input
+            class="example-full-width"
             matInput
-            placeholder="Email"
-            [formControl]="emailFormControl"
+            placeholder="Visitee"
+            aria-label="Visitee"
+            [matAutocomplete]="auto"
+            [formControl]="activeDirectoryUsersFormControl"
           />
-          <mat-error
-            *ngIf="
-              emailFormControl.hasError('email') &&
-              !emailFormControl.hasError('required')
-            "
-          >
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let user of filteredActiveDirectoryUsers | async"
+              [value]="user.email"
+            >
+              <span>{{ user.name }}</span>
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
-      </div>
-      <div>
+        <div>
           <mat-form-field class="example-full-width">
-              <input
-                matInput
-                placeholder="Password"
-                [formControl]="passwordFormControl"
-                type ="password"
-              />
-            </mat-form-field>
-      </div>
+            <input
+              matInput
+              placeholder="Reason for visit?"
+              [formControl]="reasonForVisitFormControl"
+              type="textarea"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-button matStepperNext (click)="requestGuestAccess()">
+            Next
+          </button>
+        </div>
+      </mat-step>
+      <mat-step label="Enjoy guest access!"> </mat-step>
+    </mat-vertical-stepper>
+  </div>
 
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step
-      label="Reason for visit?"
-      [stepControl]="activeDirectoryUsersFormControl"
-    >
-      <mat-form-field class="example-full-width">
-        <input
-          class="example-full-width"
-          matInput
-          placeholder="Visitee"
-          aria-label="Visitee"
-          [matAutocomplete]="auto"
-          [formControl]="activeDirectoryUsersFormControl"
-        />
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option
-            *ngFor="let user of filteredActiveDirectoryUsers | async"
-            [value]="user.email"
-          >
-            <span>{{ user.name }}</span>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <div>
-          <mat-form-field class="example-full-width">
-              <input
-                matInput
-                placeholder="Reason for visit?"
-                [formControl]="reasonForVisitFormControl"
-                type ="textarea"
-              />
-            </mat-form-field>
-      </div>
-      <div>
-        <button mat-button matStepperNext (click)="requestGuestAccess()">
-          Next
-        </button>
-      </div>
-    </mat-step>
-    <mat-step label="Enjoy guest access!"> </mat-step>
-  </mat-vertical-stepper>
-</div>
+  <app-footer></app-footer>
+</main>

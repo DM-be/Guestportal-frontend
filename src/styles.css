@@ -1885,6 +1885,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
     color: #18B5C0; 
     
 }
+  .mat-toolbar.mat-footer {
+    background: #008CB1;
+  }
     
   .mat-toolbar.mat-accent {
     background: #797979;

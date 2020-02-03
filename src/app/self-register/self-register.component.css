@@ -1,11 +1,11 @@
 .example-container {
-    display: flex;
-    flex-direction: column;
+  flex: 1;
   }
   
   .example-container > * {
     width: 50%;
     margin: auto;
+    margin-top: 0;
     padding-top: 20px;
   }
 
@@ -19,3 +19,9 @@
     padding-right: 8px;
   }
   
+
+  main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
