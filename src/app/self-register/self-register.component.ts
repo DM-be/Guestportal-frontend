@@ -7,7 +7,6 @@ import { map, startWith } from "rxjs/operators";
 import { EidUser } from "../models/EidUser";
 import { IseService } from "../services/ise.service";
 import { CreateGuestUserDto } from "../models/CreateGuestUserDto";
-import { BackendService } from "../services/backend/backend.service";
 import { EidService } from "../services/eid/eid.service";
 import { NotificationService } from "../services/notification.service";
 import { MatStepper, MatStepperNext } from "@angular/material";
@@ -46,7 +45,6 @@ export class SelfRegisterComponent implements OnInit {
 
   constructor(
     private iseService: IseService,
-    private backendService: BackendService,
     private eidService: EidService,
     private notificationService: NotificationService,
     private guestUserService: GuestUsersService

@@ -13,7 +13,7 @@ export class IseService {
   public async getActiveDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
     try {
       const url = `${BASE_URL}/ad/`;
-      let axiosResponse: AxiosResponse = await Axios.get(url); // 204
+      const axiosResponse: AxiosResponse = await Axios.get(url); // 204
       return axiosResponse.data as ActiveDirectoryUser[];
     } catch (error) {
       console.log("could not get activedirectory users ", error);
