@@ -11,25 +11,28 @@ import { AngularMaterialModule } from "./angular-material.module";
 import { TopToolbarComponent } from "./top-toolbar/top-toolbar.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SocketsModule } from "./modules/sockets/sockets.module";
+import { SocketIoModule } from 'ngx-socket-io';
+import { EidReaderSocket } from './modules/sockets/EidReaderSocket';
+import { GuestUsersSocket } from './modules/sockets/GuestUsersSocket';
+import { LayoutModule } from './modules/layout/layout/layout.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SelfRegisterComponent,
-    AdminComponent,
-    TopToolbarComponent
   ],
   imports: [
-    SocketsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SocketIoModule,
+    LayoutModule
   ],
-  providers: [],
+  providers: [GuestUsersSocket, EidReaderSocket],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

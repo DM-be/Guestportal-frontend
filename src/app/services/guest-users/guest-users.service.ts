@@ -7,9 +7,7 @@ import { CreateGuestUserDto } from "src/app/models/CreateGuestUserDto";
 
 const BASE_URL = "http://localhost:5000";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class GuestUsersService {
   public guestUsers$: BehaviorSubject<GuestUserModel[]>;
 
@@ -54,17 +52,4 @@ export class GuestUsersService {
     }
   }
 
-  public async createGuestUser(
-    createGuestUserDto: CreateGuestUserDto
-  ): Promise<void> {
-    try {
-      const url = `${BASE_URL}/guest-user/`;
-      const axiosResponse: AxiosResponse = await Axios.post(
-        url,
-        createGuestUserDto
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }

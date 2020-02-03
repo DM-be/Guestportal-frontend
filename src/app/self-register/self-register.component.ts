@@ -47,7 +47,6 @@ export class SelfRegisterComponent implements OnInit {
     private iseService: IseService,
     private eidService: EidService,
     private notificationService: NotificationService,
-    private guestUserService: GuestUsersService
   ) {}
 
   async ngOnInit() {

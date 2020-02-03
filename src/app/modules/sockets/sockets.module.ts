@@ -10,6 +10,7 @@ import { EidReaderSocket } from './EidReaderSocket';
   imports: [
     SocketIoModule
   ],
-  providers: [GuestUsersSocket, EidReaderSocket]
+  providers: [],
+  exports: []
 })
 export class SocketsModule { }

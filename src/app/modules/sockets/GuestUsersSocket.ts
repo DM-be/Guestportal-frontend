@@ -24,6 +24,7 @@ export class GuestUsersSocket extends Socket {
 
   public databaseChangesSubscription(): Observable<GuestUserModel[]> {
     return this.fromEvent(DATABASECHANGES);
+    
   }
 
   public async removeGuestUser(removeGuestDto: Object): Promise<void> {
