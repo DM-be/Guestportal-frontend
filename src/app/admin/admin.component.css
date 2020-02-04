@@ -1,46 +1,75 @@
-table {
-  width: 100%;
-
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-td,
-th {
-  width: 25%;
-}
 
 
-.example-container > * {
-  width: 80%;
-  margin: auto;
-  margin-top: 50px;
-}
+
 
 .example-container {
   flex: 1;
-  }
+}
+
+.tableContainer {
+  width: 60vw;
+  margin: auto;
+  margin-top: 50px;
+  flex: 1;
+}
 
 .ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100px;
+  max-width: 103px;
 }
-
-.from{
-  flex: 0 0 100px;
-}
-.to{
-  flex: 0 0 100px;
-}
-
 
 main {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.mat-table {
+  min-width: auto !important;
+  width: 100% !important;
+}
+
+.mat-header-row {
+  width: 100%;
+}
+
+.mat-row {
+  width: 100%;
+}
+
+.mat-column-to {
+  flex: 0 0 25% !important;
+  min-width: 104px !important;
+}
+
+.mat-column-from {
+  flex: 0 0 25% !important;
+  min-width: 104px !important;
+}
+
+.mat-column-email {
+  flex: 0 0 25% !important;
+  min-width: 104px !important;
+}
+
+.mat-column-lastName {
+  flex: 0 0 25% !important;
+  min-width: 104px !important;
+}
+
+.mat-column-firstName {
+  flex: 0 0 25% !important;
+  min-width: 104px !important;
+}
+
+.mat-column-actions {
+  flex: 0 0 25% !important;
+  min-width: 104px !important;
+}
+
+.mat-column-visiting {
+  flex: 0 0 25% !important;
+  min-width: 104px !important;
 }

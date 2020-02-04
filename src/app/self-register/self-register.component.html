@@ -4,9 +4,12 @@
   <div class="example-container">
     <mat-vertical-stepper linear #stepper>
       <mat-step
-        label="Insert your ID card into the eID reader"
+        label="Identification"
         [stepControl]="lastNameFormControl"
       >
+      <div>
+        <p>Please insert your ID card into the eID reader or enter your information manually.</p>
+      </div>
         <div *ngIf="enterManually">
           <div>
             <mat-form-field class="example-full-width">
@@ -38,7 +41,7 @@
           Enter manually
         </button>
       </mat-step>
-      <mat-step label="Enter account info" [stepControl]="emailFormControl">
+      <mat-step label="Account information" [stepControl]="emailFormControl">
         <div>
           <mat-form-field class="example-full-width">
             <input
@@ -75,7 +78,7 @@
         </div>
       </mat-step>
       <mat-step
-        label="Reason for visit?"
+        label="Reason for visit"
         [stepControl]="activeDirectoryUsersFormControl"
       >
         <mat-form-field class="example-full-width">
@@ -100,7 +103,7 @@
           <mat-form-field class="example-full-width">
             <input
               matInput
-              placeholder="Reason for visit?"
+              placeholder="Reason for visit"
               [formControl]="reasonForVisitFormControl"
               type="textarea"
             />

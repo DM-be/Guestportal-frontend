@@ -2,7 +2,7 @@
   <app-top-toolbar></app-top-toolbar>
 
   <div class="example-container">
-    <div class="mat-elevation-z8">
+    <div class="mat-elevation-z8 tableContainer">
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- ID Column -->
         <ng-container matColumnDef="firstName">
@@ -19,18 +19,10 @@
         </ng-container>
 
         <!-- Progress Column -->
-        <ng-container matColumnDef="from">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
-          <td mat-cell *matCellDef="let guestUser">
-            {{ formatDateStringFrom(guestUser) }}
-          </td>
-        </ng-container>
-
-        <!-- Progress Column -->
-        <ng-container matColumnDef="to">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Expires</th>
-          <td mat-cell *matCellDef="let guestUser">
-            {{ formatDateStringTo(guestUser) }}
+        <ng-container matColumnDef="email" class="ellipsis">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+          <td mat-cell *matCellDef="let guestUser" class="ellipsis">
+            {{ guestUser.emailAddress }}
           </td>
         </ng-container>
 
@@ -43,10 +35,18 @@
         </ng-container>
 
         <!-- Progress Column -->
-        <ng-container matColumnDef="email" class="ellipsis">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-          <td mat-cell *matCellDef="let guestUser" class="ellipsis">
-            {{ guestUser.emailAddress }}
+        <ng-container matColumnDef="from">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+          <td mat-cell *matCellDef="let guestUser">
+            {{ formatDateStringFrom(guestUser) }}
+          </td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="to">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Expires</th>
+          <td mat-cell *matCellDef="let guestUser">
+            {{ formatDateStringTo(guestUser) }}
           </td>
         </ng-container>
 

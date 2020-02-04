@@ -15,10 +15,10 @@ export class AdminComponent implements OnInit {
   displayedColumns: string[] = [
     "firstName",
     "lastName",
+    "email",
+    "visiting",
     "from",
     "to",
-    "visiting",
-    "email",
     "actions"
   ]; //  "from date", "to date", "personBeingVisited"
   dataSource: GuestUserDataSource;
