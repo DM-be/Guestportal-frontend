@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../services/authentication/auth.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-top-toolbar",
@@ -7,7 +8,7 @@ import { AuthService } from "../services/authentication/auth.service";
   styleUrls: ["./top-toolbar.component.css"]
 })
 export class TopToolbarComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -16,5 +17,15 @@ export class TopToolbarComponent implements OnInit {
       this.authService.getAdminUserFromLocalStorage() &&
       !this.authService.isTokenExpired()
     );
+  }
+
+  public async logout() {
+    try {
+      this.authService.logoutUser();
+      await this.router.navigate(["/login"]);
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 }

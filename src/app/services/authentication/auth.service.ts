@@ -31,11 +31,29 @@ export class AuthService {
     }
   }
 
+  public logoutUser() {
+    try {
+      this.clearAdminUserFromLocalStorage();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   private saveAdminUserToLocalStorage(adminUser: AdminUser) {
     try {
       localStorage.setItem("AdminUser", JSON.stringify(adminUser));
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  private clearAdminUserFromLocalStorage() {
+    try {
+      localStorage.removeItem("AdminUser");
+    } catch (error) {
+      console.log(error);
+      
     }
   }
 
