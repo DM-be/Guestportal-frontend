@@ -10,10 +10,8 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  public loginUserDto: LoginUserDto = {
-    email: "",
-    password: ""
-  };
+  public email: string = "";
+  public password: string = "";
 
   constructor(
     private router: Router,
@@ -25,14 +23,15 @@ export class LoginComponent implements OnInit {
 
   public async login() {
     try {
-      const loginResult = await this.authService.authenticateUser(
-        this.loginUserDto
-      );
+      const loginResult = await this.authService.authenticateUser({
+        email: this.email,
+        password: this.password
+      });
 
       if (this.authService.instanceOfAdminUser(loginResult)) {
         await this.router.navigate(["/admin"]);
       } else {
-        await this.snackBar.open("invalid user");
+        await this.snackBar.open("Your username or password is incorrrect.");
       }
     } catch (error) {
       console.log(error);
