@@ -11,7 +11,7 @@ import { EidService } from "../services/eid/eid.service";
 import { NotificationService } from "../services/notification.service";
 import { MatStepper, MatStepperNext, MatDialog } from "@angular/material";
 import { GuestUsersService } from "../services/guest-users/guest-users.service";
-import { TermsConditionsDialogComponent } from '../terms-conditions-dialog/terms-conditions-dialog.component';
+import { TermsConditionsDialogComponent } from "../terms-conditions-dialog/terms-conditions-dialog.component";
 
 @Component({
   selector: "app-self-register",
@@ -36,11 +36,11 @@ export class SelfRegisterComponent implements OnInit {
 
   private createGuestUserDto: CreateGuestUserDto;
 
-  activeDirectoryUsersFormControl = new FormControl("", [Validators.required]);
-  firstNameFormControl = new FormControl("", [Validators.required]);
-  lastNameFormControl = new FormControl("", [Validators.required]);
-  passwordFormControl = new FormControl("", [Validators.required]);
-  reasonForVisitFormControl = new FormControl("", [Validators.required]);
+  activeDirectoryUsersFormControl = new FormControl(undefined, [Validators.required]);
+  firstNameFormControl = new FormControl(undefined, [Validators.required]);
+  lastNameFormControl = new FormControl(undefined,[Validators.required]);
+  passwordFormControl = new FormControl(undefined,[Validators.required]);
+  reasonForVisitFormControl = new FormControl([undefined,Validators.required]);
 
   activeDirectoryUsers: ActiveDirectoryUser[];
   filteredActiveDirectoryUsers: Observable<ActiveDirectoryUser[]>;
@@ -85,11 +85,11 @@ export class SelfRegisterComponent implements OnInit {
   }
 
   private listenToEidEvents() {
-    this.eidService.eidUserSubject.subscribe((eidUser: EidUser) => {
+    this.eidService.eidUserSubject.subscribe(async (eidUser: EidUser) => {
       if (eidUser) {
         this.firstNameFormControl.setValue(eidUser.firstNames[0]);
         this.lastNameFormControl.setValue(eidUser.surName);
-        this.showSuccessEidNotification();
+        await this.showSuccessEidNotification();
         this.goForwardAfterNamesEidEvent();
       }
     });
@@ -158,18 +158,11 @@ export class SelfRegisterComponent implements OnInit {
     this.stepper.reset();
   }
 
-    openDialog() {
-    const dialogRef = this.dialog.open(TermsConditionsDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-
-   
+  public openDialog(): void {
+    this.dialog.open(TermsConditionsDialogComponent);
   }
 
-  updateCheckedTerms() {
+  public updateCheckedTerms(): void {
     this.checkedTerms = !this.checkedTerms;
-    console.log(this.checkedTerms);
   }
 }
