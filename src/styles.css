@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
 
 main {
   display: flex;
@@ -13,7 +14,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 * Generated theme by Material Theme Generator
 * https://materialtheme.arcsine.dev
 */
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+
 .mat-badge-content {
   font-weight: 600;
   font-size: 12px; }
