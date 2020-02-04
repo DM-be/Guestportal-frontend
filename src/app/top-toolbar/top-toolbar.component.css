@@ -9,3 +9,7 @@
      width: 70%;
      height: 70%;
   }
+
+  mat-toolbar {
+   padding: 5px;
+}

@@ -1,4 +1,4 @@
-import { Injectable, ɵConsole } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { MatSnackBar, MatSnackBarConfig } from "@angular/material";
 
 @Injectable({
@@ -10,8 +10,8 @@ export class NotificationService {
     this.matSnackbarConfig = {
       horizontalPosition: "center",
       verticalPosition: "top",
-      duration: 1500,
-      panelClass: ['successPanel']
+      duration: 2500,
+      panelClass: ["successPanel"]
     };
     //TODO: add support for green(success and red-> no succes)
   }

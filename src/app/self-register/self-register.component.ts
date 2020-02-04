@@ -40,7 +40,7 @@ export class SelfRegisterComponent implements OnInit {
   firstNameFormControl = new FormControl(undefined, [Validators.required]);
   lastNameFormControl = new FormControl(undefined,[Validators.required]);
   passwordFormControl = new FormControl(undefined,[Validators.required]);
-  reasonForVisitFormControl = new FormControl([undefined,Validators.required]);
+  reasonForVisitFormControl = new FormControl(undefined, [Validators.required]);
 
   activeDirectoryUsers: ActiveDirectoryUser[];
   filteredActiveDirectoryUsers: Observable<ActiveDirectoryUser[]>;
