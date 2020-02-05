@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { LoginUserDto } from "../models/LoginUser.dto";
 import { AuthService } from "../services/authentication/auth.service";
 import { Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { NotificationService } from "../services/notification.service";
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: "app-login",
@@ -13,10 +13,17 @@ export class LoginComponent implements OnInit {
   public email: string = "";
   public password: string = "";
 
+  emailFormControl = new FormControl("", [
+    Validators.required,
+    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+  ]);
+
+  passwordFormControl = new FormControl(undefined, Validators.required);
+
   constructor(
     private router: Router,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {}
@@ -31,10 +38,13 @@ export class LoginComponent implements OnInit {
       if (this.authService.instanceOfAdminUser(loginResult)) {
         await this.router.navigate(["/admin"]);
       } else {
-        await this.snackBar.open("Your username or password is incorrrect.");
+        await this.notificationService.showNotification(
+          loginResult.message,
+          false
+        );
       }
     } catch (error) {
-      console.log(error);
+   
     }
   }
 }

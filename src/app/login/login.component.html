@@ -1,6 +1,4 @@
 <main>
-
-
   <app-top-toolbar></app-top-toolbar>
 
   <mat-card class="card-wrapper">
@@ -12,7 +10,16 @@
             placeholder="Email"
             [(ngModel)]="email"
             name="email"
+            [formControl]="emailFormControl"
           />
+          <mat-error
+            *ngIf="
+              emailFormControl.hasError('pattern') &&
+              !emailFormControl.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
         </mat-form-field>
       </div>
       <div>
@@ -23,15 +30,21 @@
             [(ngModel)]="password"
             type="password"
             name="password"
+            [formControl]="passwordFormControl"
           />
         </mat-form-field>
       </div>
       <mat-card-actions>
         <button
-          mat-button
+          mat-raised-button
           (click)="login()"
           class="example-full-width"
           color="primary"
+          [disabled]="
+            emailFormControl.hasError('pattern') ||
+            emailFormControl.hasError('required') 
+            || passwordFormControl.hasError('required')
+          "
         >
           LOGIN
         </button>
@@ -40,5 +53,4 @@
   </mat-card>
 
   <app-footer></app-footer>
-
 </main>

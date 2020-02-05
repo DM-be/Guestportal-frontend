@@ -34,12 +34,12 @@ export class SelfRegisterComponent implements OnInit {
 
   nameFormControl = new FormControl();
 
-  private createGuestUserDto: CreateGuestUserDto;
-
-  activeDirectoryUsersFormControl = new FormControl(undefined, [Validators.required]);
+  activeDirectoryUsersFormControl = new FormControl(undefined, [
+    Validators.required
+  ]);
   firstNameFormControl = new FormControl(undefined, [Validators.required]);
-  lastNameFormControl = new FormControl(undefined,[Validators.required]);
-  passwordFormControl = new FormControl(undefined,[Validators.required]);
+  lastNameFormControl = new FormControl(undefined, [Validators.required]);
+  passwordFormControl = new FormControl(undefined, [Validators.required]);
   reasonForVisitFormControl = new FormControl(undefined, [Validators.required]);
 
   activeDirectoryUsers: ActiveDirectoryUser[];
@@ -55,7 +55,6 @@ export class SelfRegisterComponent implements OnInit {
   async ngOnInit() {
     this.activeDirectoryUsers = await this.iseService.getActiveDirectoryUsers();
     this.pipeFilteredActiveDirectoryUsers();
-    this.createGuestUserDto = new CreateGuestUserDto();
     this.listenToEidEvents();
   }
 
@@ -107,7 +106,8 @@ export class SelfRegisterComponent implements OnInit {
     try {
       //TODO: better text
       await this.notificationService.showNotification(
-        `Thanks ${this.firstNameFormControl.value}`
+        `Thanks ${this.firstNameFormControl.value}`,
+        true
       );
     } catch (error) {
       console.log(error);
@@ -117,7 +117,8 @@ export class SelfRegisterComponent implements OnInit {
   private async sendGuestAccessNotification() {
     try {
       await this.notificationService.showNotification(
-        `You now have access to the guest network ${this.firstNameFormControl.value}`
+        `You now have access to the guest network ${this.firstNameFormControl.value}`,
+        true
       );
     } catch (error) {
       console.log(error);

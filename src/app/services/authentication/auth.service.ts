@@ -5,7 +5,7 @@ import { AdminUser } from "src/app/models/AdminUser.dto";
 import { CustomError } from "src/app/models/CustomError";
 import { TokenResponse } from "src/app/models/TokenResponse";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { environment } from 'src/environments/environment';
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root"
@@ -27,7 +27,7 @@ export class AuthService {
       }
       return adminUser as CustomError;
     } catch (error) {
-      console.log("error in authenticating admin user", error);
+      return error as CustomError;
     }
   }
 
@@ -38,7 +38,6 @@ export class AuthService {
       console.log(error);
     }
   }
-
 
   private saveAdminUserToLocalStorage(adminUser: AdminUser) {
     try {
@@ -53,7 +52,6 @@ export class AuthService {
       localStorage.removeItem("AdminUser");
     } catch (error) {
       console.log(error);
-      
     }
   }
 

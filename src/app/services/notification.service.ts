@@ -7,18 +7,28 @@ import { MatSnackBar, MatSnackBarConfig } from "@angular/material";
 export class NotificationService {
   private matSnackbarConfig: MatSnackBarConfig;
   constructor(private snackBar: MatSnackBar) {
-    this.matSnackbarConfig = {
+  }
+
+
+  private generateSnackbarConfig(panelClass: string): MatSnackBarConfig {
+    return {
       horizontalPosition: "center",
       verticalPosition: "top",
       duration: 2500,
-      panelClass: ["successPanel"]
+      panelClass: [panelClass]
     };
-    //TODO: add support for green(success and red-> no succes)
   }
-
-  public async showNotification(message: string): Promise<void> {
+  
+  public async showNotification(message: string, success: boolean): Promise<void> {
     try {
-      this.snackBar.open(message, undefined, this.matSnackbarConfig); // todo add color - centering in snackbar config
+      if(success)
+      {
+        this.snackBar.open(message, undefined, this.generateSnackbarConfig('successPanel')); // todo add color - centering in snackbar config
+      }
+      else {
+        this.snackBar.open(message, undefined, this.generateSnackbarConfig('dangerPanel')); // todo add color - centering in snackbar config
+      }
+      
     } catch (error) {
       console.log(error);
     }

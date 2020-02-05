@@ -1,11 +1,13 @@
-
-
 .card-wrapper {
-    width: 30%;
-    margin: auto;
-} 
-
-.example-full-width {
-    width: 100%;
+  width: 30%;
+  margin: auto;
 }
 
+.example-full-width {
+  width: 100%;
+}
+
+::ng-deep snack-bar-container.dangerPanel {
+  background-color: #ffb3b3;
+  color: white;
+}
