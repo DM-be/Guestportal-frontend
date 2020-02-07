@@ -3,8 +3,9 @@ import { Socket } from "ngx-socket-io";
 import { Observable } from "rxjs";
 import { GuestUserModel } from "src/app/models/GuestUserModel";
 import { AuthService } from "src/app/services/authentication/auth.service";
+import { environment } from 'src/environments/environment';
 
-const URL = "http://localhost:5002";
+// const URL = "http://localhost:5002";
 const DATABASECHANGES = "guestUserDatabaseChange";
 const REMOVE_GUEST_USER = "removeUser";
 
@@ -12,7 +13,7 @@ const REMOVE_GUEST_USER = "removeUser";
 export class GuestUsersSocket extends Socket {
   constructor(private authService: AuthService) {
     super({
-      url: URL,
+      url: environment.WEBSOCKET_GUEST,
       options: {
         query: {
           token: authService.getAdminUserFromLocalStorage().tokenResponse.token

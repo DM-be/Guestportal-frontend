@@ -12,7 +12,7 @@ export class IseService {
 
   public async getActiveDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
     try {
-      const url = `${environment.backend_url}/ad/`;
+      const url = `${environment.BACKEND_URL_PORT}/ad/`;
       const axiosResponse: AxiosResponse = await Axios.get(url); // 204
       return axiosResponse.data as ActiveDirectoryUser[];
     } catch (error) {

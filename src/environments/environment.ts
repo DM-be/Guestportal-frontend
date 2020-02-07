@@ -4,8 +4,28 @@
 
 export const environment = {
   production: false,
-  backend_url: 'http://localhost:5000'
+  BACKEND_URL_PORT: '$BACKEND_URL_PORT',
+  WEBSOCKET_EID: '$WEBSOCKET_EID',
+  WEBSOCKET_GUEST: '$WEBSOCKET_GUEST'
+  // + WEBSOCKET 1 -  2
+  
 };
+
+
+/*
+
+
+    production: true,
+    GAME_SERVER_URL: "$GAME_SERVER_URL",
+    GUI_SERVER_URL: "$GUI_SERVER_URL",
+    AUTH_SERVER_URL: "$AUTH_SERVER_URL"
+
+*/
+
+
+
+
+// 'http://localhost:5000'
 
 /*
  * For easier debugging in development mode, you can import the following file

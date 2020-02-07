@@ -2,14 +2,15 @@ import { Socket } from "ngx-socket-io";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { EidUser } from "src/app/models/EidUser";
+import { environment } from 'src/environments/environment';
 
-const URL = "http://localhost:5001";
+
 const READ_CARD_EVENT = "readCardDataEvent";
 
 @Injectable()
 export class EidReaderSocket extends Socket {
   constructor() {
-    super({ url: URL, options: {} });
+    super({ url: environment.WEBSOCKET_EID, options: {} });
   }
 
   public readCardEventSubscription(): Observable<EidUser> {
