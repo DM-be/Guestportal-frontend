@@ -13,7 +13,7 @@ export class AxiosRequestsService {
     createGuestUserDto: CreateGuestUserDto
   ): Promise<void> {
     try {
-      const url = `${environment.backend_url}/guest-user/`;
+      const url = `${environment.BACKEND_URL_PORT}/guest-user/`;
       const axiosResponse: AxiosResponse = await Axios.post(
         url,
         createGuestUserDto

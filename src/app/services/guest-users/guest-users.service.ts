@@ -43,7 +43,7 @@ export class GuestUsersService {
 
   private async getGuestUsers(): Promise<GuestUserModel[]> {
     try {
-      const url = `${environment.backend_url}/guest-user/`;
+      const url = `${environment.BACKEND_URL_PORT}/guest-user/`;
       let axiosResponse: AxiosResponse = await Axios.get(url);
       return axiosResponse.data as GuestUserModel[];
     } catch (error) {

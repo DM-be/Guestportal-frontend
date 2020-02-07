@@ -71,7 +71,7 @@ export class AuthService {
     loginUserDto: LoginUserDto
   ): Promise<AdminUser | CustomError> {
     try {
-      const url = `${environment.backend_url}/auth/`;
+      const url = `${environment.BACKEND_URL_PORT}/auth/`;
       const axiosResponse: AxiosResponse = await Axios.post(url, loginUserDto); // 204
       if (axiosResponse.data.token) {
         const decodedToken: AdminUser = this.decodeToken(axiosResponse.data);
