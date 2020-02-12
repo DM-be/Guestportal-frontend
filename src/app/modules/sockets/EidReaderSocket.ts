@@ -10,7 +10,7 @@ const READ_CARD_EVENT = "readCardDataEvent";
 @Injectable()
 export class EidReaderSocket extends Socket {
   constructor() {
-    super({ url: environment.WEBSOCKET_EID, options: {} });
+    super({ url: environment.WEBSOCKET_EID_URL_PORT, options: {} });
   }
 
   public readCardEventSubscription(): Observable<EidUser> {

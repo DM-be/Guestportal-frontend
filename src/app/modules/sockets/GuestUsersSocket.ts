@@ -13,7 +13,7 @@ const REMOVE_GUEST_USER = "removeUser";
 export class GuestUsersSocket extends Socket {
   constructor(private authService: AuthService) {
     super({
-      url: environment.WEBSOCKET_GUEST,
+      url: environment.WEBSOCKET_GUEST_URL_PORT,
       options: {
         query: {
           token: authService.getAdminUserFromLocalStorage().tokenResponse.token
