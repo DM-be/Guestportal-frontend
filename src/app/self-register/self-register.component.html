@@ -95,7 +95,7 @@
               *ngFor="let user of filteredActiveDirectoryUsers | async"
               [value]="user.email"
             >
-              <span>{{ user.email }}</span>
+              <span>{{ user.name }}</span>
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -117,12 +117,12 @@
       </mat-step>
       <mat-step label="Request access">
         <div>
-            <mat-checkbox  (change)="updateCheckedTerms()">I agree to the <a (click)="openDialog()">terms and conditions</a></mat-checkbox>
+            <mat-checkbox  [(ngModel)]="checkedTerms" [checked]="checkedTerms">I agree to the <a (click)="openDialog()">terms and conditions</a></mat-checkbox>
         </div>
   
 
         <div>
-          <button mat-raised-button color="primary" class="requestButton"(click)="requestGuestAccess()" [disabled]="!checkedTerms">REQUEST</button>
+          <button mat-raised-button color="primary" class="requestButton"(click)="requestGuestAccess()" [disabled]="checkedTerms">REQUEST</button>
         </div>
       </mat-step>
 

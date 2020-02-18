@@ -2,16 +2,15 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import { ActiveDirectoryUser } from "../models/ActiveDirectoryUser";
 import { Observable } from "rxjs";
-
 import { map, startWith } from "rxjs/operators";
 import { EidUser } from "../models/EidUser";
 import { IseService } from "../services/ise.service";
 import { CreateGuestUserDto } from "../models/CreateGuestUserDto";
 import { EidService } from "../services/eid/eid.service";
 import { NotificationService } from "../services/notification.service";
-import { MatStepper, MatStepperNext, MatDialog } from "@angular/material";
-import { GuestUsersService } from "../services/guest-users/guest-users.service";
+import { MatStepper, MatDialog } from "@angular/material";
 import { TermsConditionsDialogComponent } from "../terms-conditions-dialog/terms-conditions-dialog.component";
+import { AxiosRequestsService } from "../services/axios-requests/axios-requests.service";
 
 @Component({
   selector: "app-self-register",
@@ -27,8 +26,6 @@ export class SelfRegisterComponent implements OnInit {
   enterManually = false;
   showManualButton = true;
   checkedTerms = false;
-
-  @ViewChild("namesStep", undefined) private namesStep: MatStepperNext;
 
   @ViewChild("stepper", undefined) private stepper: MatStepper;
 
@@ -49,7 +46,8 @@ export class SelfRegisterComponent implements OnInit {
     private iseService: IseService,
     private eidService: EidService,
     private notificationService: NotificationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private axiosRequestService: AxiosRequestsService
   ) {}
 
   async ngOnInit() {
@@ -96,7 +94,7 @@ export class SelfRegisterComponent implements OnInit {
 
   private goForwardAfterNamesEidEvent() {
     try {
-      this.namesStep._stepper.next();
+      this.stepper.next();
     } catch (error) {
       console.log(error);
     }
@@ -138,7 +136,7 @@ export class SelfRegisterComponent implements OnInit {
       emailAddress: this.emailFormControl.value
     };
     try {
-      //     await this.guestUserService.createGuestUser(createGuestUserDto);
+      await this.axiosRequestService.createGuestUser(createGuestUserDto);
       await this.sendGuestAccessNotification();
       this.resetForm();
     } catch (error) {
@@ -147,12 +145,12 @@ export class SelfRegisterComponent implements OnInit {
   }
 
   private resetForm() {
-    this.firstNameFormControl.setValue("");
-    this.lastNameFormControl.setValue("");
-    this.activeDirectoryUsersFormControl.setValue("");
-    this.passwordFormControl.setValue("");
-    this.reasonForVisitFormControl.setValue("");
-    this.emailFormControl.setValue("");
+    this.firstNameFormControl.reset();
+    this.lastNameFormControl.reset();
+    this.activeDirectoryUsersFormControl.reset();
+    this.passwordFormControl.reset();
+    this.reasonForVisitFormControl.reset();
+    this.emailFormControl.reset();
     this.enterManually = false;
     this.showManualButton = true;
     this.checkedTerms = false;
