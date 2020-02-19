@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { CreateGuestUserDto } from "src/app/models/CreateGuestUserDto";
 import Axios, { AxiosResponse } from "axios";
 import { environment } from "src/environments/environment";
+import { RemoveGuestUserDto } from "src/app/models/RemoveGuestUserDto";
 
 @Injectable({
   providedIn: "root"
@@ -18,6 +19,16 @@ export class AxiosRequestsService {
         url,
         createGuestUserDto
       );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async removeGuestUser(emailAddress: string) {
+    try {
+      const url = `${environment.BACKEND_URL_PORT}/guest-user/${emailAddress}`;
+      console.log('calling')
+      await Axios.delete(url);
     } catch (error) {
       console.log(error);
     }

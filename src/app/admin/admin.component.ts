@@ -5,6 +5,7 @@ import { GuestUserModel } from "../models/GuestUserModel";
 import { Observable } from "rxjs";
 import { DataSource } from "@angular/cdk/table";
 import * as moment from "moment";
+import { AxiosRequestsService } from '../services/axios-requests/axios-requests.service';
 
 @Component({
   selector: "app-admin",
@@ -26,13 +27,19 @@ export class AdminComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private guestUsersService: GuestUsersService) {
+  constructor(private guestUsersService: GuestUsersService, private axiosRequestService: AxiosRequestsService) {
     this.dataSource = new GuestUserDataSource(this.guestUsersService);
   }
   ngOnInit() {}
 
   async removeUser(guestUser: GuestUserModel) {
-    await this.guestUsersService.removeGuestUser(guestUser);
+   //await this.guestUsersService.removeGuestUser(guestUser);
+   try {
+    await this.axiosRequestService.removeGuestUser(guestUser.emailAddress);
+   } catch (error) {
+     console.log(error);
+   }
+   
   }
 
   public formatDateStringFrom(guestUser: GuestUserModel) {
