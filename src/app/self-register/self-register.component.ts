@@ -18,7 +18,7 @@ import { AxiosRequestsService } from "../services/axios-requests/axios-requests.
   styleUrls: ["./self-register.component.css"]
 })
 export class SelfRegisterComponent implements OnInit {
-  emailFormControl = new FormControl("", [
+  emailFormControl = new FormControl(undefined, [
     Validators.required,
     Validators.email
   ]);
@@ -38,7 +38,6 @@ export class SelfRegisterComponent implements OnInit {
   lastNameFormControl = new FormControl(undefined, [Validators.required]);
   passwordFormControl = new FormControl(undefined, [Validators.required]);
   reasonForVisitFormControl = new FormControl(undefined, [Validators.required]);
-
   activeDirectoryUsers: ActiveDirectoryUser[];
   filteredActiveDirectoryUsers: Observable<ActiveDirectoryUser[]>;
 
@@ -92,7 +91,7 @@ export class SelfRegisterComponent implements OnInit {
     });
   }
 
-  private goForwardAfterNamesEidEvent() {
+  private goForwardAfterNamesEidEvent(): void {
     try {
       this.stepper.next();
     } catch (error) {
@@ -112,7 +111,7 @@ export class SelfRegisterComponent implements OnInit {
     }
   }
 
-  private async sendGuestAccessNotification() {
+  private async sendGuestAccessNotification(): Promise<void> {
     try {
       await this.notificationService.showNotification(
         `You now have access to the guest network ${this.firstNameFormControl.value}`,
@@ -144,7 +143,7 @@ export class SelfRegisterComponent implements OnInit {
     }
   }
 
-  private resetForm() {
+  private resetForm(): void {
     this.firstNameFormControl.reset();
     this.lastNameFormControl.reset();
     this.activeDirectoryUsersFormControl.reset();

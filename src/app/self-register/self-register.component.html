@@ -1,15 +1,15 @@
 <main>
   <app-top-toolbar></app-top-toolbar>
 
-  <div class="example-container">
+  <div class="container">
     <mat-vertical-stepper linear #stepper>
-      <mat-step
-        label="Identification"
-        [stepControl]="lastNameFormControl"
-      >
-      <div>
-        <p>Please insert your ID card into the eID reader or enter your information manually.</p>
-      </div>
+      <mat-step label="Identification" [stepControl]="lastNameFormControl">
+        <div>
+          <p>
+            Please insert your ID card into the eID reader or enter your
+            information manually.
+          </p>
+        </div>
         <div *ngIf="enterManually">
           <div>
             <mat-form-field class="example-full-width">
@@ -117,15 +117,24 @@
       </mat-step>
       <mat-step label="Request access">
         <div>
-            <mat-checkbox  [(ngModel)]="checkedTerms" [checked]="checkedTerms">I agree to the <a (click)="openDialog()">terms and conditions</a></mat-checkbox>
+          <mat-checkbox [(ngModel)]="checkedTerms" [checked]="checkedTerms"
+            >I agree to the
+            <a (click)="openDialog()">terms and conditions</a></mat-checkbox
+          >
         </div>
-  
 
         <div>
-          <button mat-raised-button color="primary" class="requestButton"(click)="requestGuestAccess()" [disabled]="checkedTerms">REQUEST</button>
+          <button
+            mat-raised-button
+            color="primary"
+            class="requestButton"
+            (click)="requestGuestAccess()"
+            [disabled]="checkedTerms"
+          >
+            REQUEST
+          </button>
         </div>
       </mat-step>
-
     </mat-vertical-stepper>
   </div>
 

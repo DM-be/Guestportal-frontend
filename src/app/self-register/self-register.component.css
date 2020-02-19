@@ -1,8 +1,8 @@
-.example-container {
+.container {
   flex: 1;
 }
 
-.example-container > * {
+.container > * {
   width: 50%;
   margin: auto;
   margin-top: 0;
