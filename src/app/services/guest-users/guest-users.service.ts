@@ -4,7 +4,7 @@ import { GuestUserModel } from "../../models/GuestUserModel";
 import { GuestUsersSocket } from "src/app/modules/sockets/GuestUsersSocket";
 import Axios, { AxiosResponse } from "axios";
 import { CreateGuestUserDto } from "src/app/models/CreateGuestUserDto";
-import { environment } from 'src/environments/environment';
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class GuestUsersService {
@@ -19,16 +19,6 @@ export class GuestUsersService {
           this.guestUsers$.next(guestUserModels);
         }
       });
-  }
-
-  public async removeGuestUser(guestUserModel: GuestUserModel) {
-    try {
-      await this.socket.removeGuestUser({
-        emailAddress: guestUserModel.emailAddress
-      });
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   private async initializeGuestUsers$(): Promise<void> {
@@ -50,5 +40,4 @@ export class GuestUsersService {
       console.log("could not get guestusers users ", error);
     }
   }
-
 }
