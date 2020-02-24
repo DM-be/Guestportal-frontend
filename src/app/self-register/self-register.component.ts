@@ -3,10 +3,8 @@ import { FormControl, Validators } from "@angular/forms";
 import { ActiveDirectoryUser } from "../models/ActiveDirectoryUser";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
-import { EidUser } from "../models/EidUser";
 import { IseService } from "../services/ise.service";
 import { CreateGuestUserDto } from "../models/CreateGuestUserDto";
-import { EidService } from "../services/eid/eid.service";
 import { NotificationService } from "../services/notification.service";
 import { MatStepper, MatDialog } from "@angular/material";
 import { TermsConditionsDialogComponent } from "../terms-conditions-dialog/terms-conditions-dialog.component";
@@ -43,7 +41,6 @@ export class SelfRegisterComponent implements OnInit {
 
   constructor(
     private iseService: IseService,
-    private eidService: EidService,
     private notificationService: NotificationService,
     private dialog: MatDialog,
     private axiosRequestService: AxiosRequestsService
@@ -52,7 +49,6 @@ export class SelfRegisterComponent implements OnInit {
   async ngOnInit() {
     this.activeDirectoryUsers = await this.iseService.getActiveDirectoryUsers();
     this.pipeFilteredActiveDirectoryUsers();
-    this.listenToEidEvents();
   }
 
   private pipeFilteredActiveDirectoryUsers() {
@@ -78,37 +74,6 @@ export class SelfRegisterComponent implements OnInit {
   public toggleManualButton() {
     this.enterManually = !this.enterManually;
     this.showManualButton = false;
-  }
-
-  private listenToEidEvents() {
-    this.eidService.eidUserSubject.subscribe(async (eidUser: EidUser) => {
-      if (eidUser) {
-        this.firstNameFormControl.setValue(eidUser.firstNames[0]);
-        this.lastNameFormControl.setValue(eidUser.surName);
-        await this.showSuccessEidNotification();
-        this.goForwardAfterNamesEidEvent();
-      }
-    });
-  }
-
-  private goForwardAfterNamesEidEvent(): void {
-    try {
-      this.stepper.next();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  public async showSuccessEidNotification() {
-    try {
-      //TODO: better text
-      await this.notificationService.showNotification(
-        `Thanks ${this.firstNameFormControl.value}`,
-        true
-      );
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   private async sendGuestAccessNotification(): Promise<void> {

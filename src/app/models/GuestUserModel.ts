@@ -1,4 +1,5 @@
 export interface GuestUserModel {
+    userName: string;
     firstName: string;
     lastName: string;
     fromDate: string;

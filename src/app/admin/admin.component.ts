@@ -5,14 +5,14 @@ import { GuestUserModel } from "../models/GuestUserModel";
 import { Observable } from "rxjs";
 import { DataSource } from "@angular/cdk/table";
 import * as moment from "moment";
-import { AxiosRequestsService } from '../services/axios-requests/axios-requests.service';
+import { AxiosRequestsService } from "../services/axios-requests/axios-requests.service";
 
 @Component({
   selector: "app-admin",
   templateUrl: "./admin.component.html",
   styleUrls: ["./admin.component.css"]
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
   displayedColumns: string[] = [
     "firstName",
     "lastName",
@@ -21,31 +21,30 @@ export class AdminComponent implements OnInit {
     "from",
     "to",
     "actions"
-  ]; //  "from date", "to date", "personBeingVisited"
+  ];
   dataSource: GuestUserDataSource;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private guestUsersService: GuestUsersService, private axiosRequestService: AxiosRequestsService) {
+  constructor(
+    private guestUsersService: GuestUsersService,
+    private axiosRequestService: AxiosRequestsService
+  ) {
     this.dataSource = new GuestUserDataSource(this.guestUsersService);
   }
-  ngOnInit() {}
 
-  async removeUser(guestUser: GuestUserModel) {
-   //await this.guestUsersService.removeGuestUser(guestUser);
-   try {
-    await this.axiosRequestService.removeGuestUser(guestUser.emailAddress);
-   } catch (error) {
-     console.log(error);
-   }
-   
+  async removeUser(guestUser: GuestUserModel): Promise<void> {
+    try {
+      await this.axiosRequestService.removeGuestUser(guestUser.userName);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public formatDateStringFrom(guestUser: GuestUserModel) {
     return moment(guestUser.fromDate).fromNow();
   }
-
 
   public formatDateStringTo(guestUser: GuestUserModel) {
     return moment(guestUser.toDate).fromNow();

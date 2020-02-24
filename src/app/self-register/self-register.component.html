@@ -4,13 +4,6 @@
   <div class="container">
     <mat-vertical-stepper linear #stepper>
       <mat-step label="Identification" [stepControl]="lastNameFormControl">
-        <div>
-          <p>
-            Please insert your ID card into the eID reader or enter your
-            information manually.
-          </p>
-        </div>
-        <div *ngIf="enterManually">
           <div>
             <mat-form-field class="example-full-width">
               <input
@@ -19,7 +12,6 @@
                 [formControl]="firstNameFormControl"
               />
             </mat-form-field>
-          </div>
           <div>
             <mat-form-field class="example-full-width">
               <input
@@ -33,13 +25,6 @@
             <button mat-button matStepperNext #namesStep>Next</button>
           </div>
         </div>
-        <button
-          (click)="toggleManualButton()"
-          mat-button
-          *ngIf="showManualButton"
-        >
-          Enter manually
-        </button>
       </mat-step>
       <mat-step label="Account information" [stepControl]="emailFormControl">
         <div>
@@ -117,10 +102,11 @@
       </mat-step>
       <mat-step label="Request access">
         <div>
-          <mat-checkbox [(ngModel)]="checkedTerms" [checked]="checkedTerms"
-            >I agree to the
-            <a (click)="openDialog()">terms and conditions</a></mat-checkbox
+          <mat-checkbox [(ngModel)]="checkedTerms" [checked]="checkedTerms">
+              <a (click)="openDialog()"> I agree to the terms and conditions</a>
+           </mat-checkbox
           >
+          
         </div>
 
         <div>
@@ -129,7 +115,7 @@
             color="primary"
             class="requestButton"
             (click)="requestGuestAccess()"
-            [disabled]="checkedTerms"
+            [disabled]="!checkedTerms"
           >
             REQUEST
           </button>
