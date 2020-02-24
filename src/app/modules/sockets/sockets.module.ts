@@ -1,16 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SocketIoModule } from 'ngx-socket-io';
-import { GuestUsersSocket } from './GuestUsersSocket';
-import { EidReaderSocket } from './EidReaderSocket';
-
-
+import { NgModule } from "@angular/core";
+import { SocketIoModule } from "ngx-socket-io";
 @NgModule({
   declarations: [],
-  imports: [
-    SocketIoModule
-  ],
+  imports: [SocketIoModule],
   providers: [],
   exports: []
 })
-export class SocketsModule { }
+export class SocketsModule {}

@@ -3,11 +3,10 @@ import { Socket } from "ngx-socket-io";
 import { Observable } from "rxjs";
 import { GuestUserModel } from "src/app/models/GuestUserModel";
 import { AuthService } from "src/app/services/authentication/auth.service";
-import { environment } from 'src/environments/environment';
+import { environment } from "src/environments/environment";
 
 // const URL = "http://localhost:5002";
 const DATABASECHANGES = "guestUserDatabaseChange";
-const REMOVE_GUEST_USER = "removeUser";
 
 @Injectable()
 export class GuestUsersSocket extends Socket {
@@ -25,16 +24,5 @@ export class GuestUsersSocket extends Socket {
 
   public databaseChangesSubscription(): Observable<GuestUserModel[]> {
     return this.fromEvent(DATABASECHANGES);
-    
-  }
-
-  public async removeGuestUser(removeGuestDto: Object): Promise<void> {
-    try {
-      await this.emit(REMOVE_GUEST_USER, removeGuestDto, () => {
-        console.log("removed user");
-      });
-    } catch (error) {
-      console.log(error);
-    }
   }
 }
