@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { GuestUsersService } from "../services/guest-users/guest-users.service";
-import { MatTableDataSource, MatPaginator, MatSort } from "@angular/material";
+import { MatPaginator, MatSort } from "@angular/material";
 import { GuestUserModel } from "../models/GuestUserModel";
 import { Observable } from "rxjs";
 import { DataSource } from "@angular/cdk/table";
