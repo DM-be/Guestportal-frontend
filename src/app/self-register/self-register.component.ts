@@ -9,6 +9,7 @@ import { NotificationService } from "../services/notification.service";
 import { MatStepper, MatDialog } from "@angular/material";
 import { TermsConditionsDialogComponent } from "../terms-conditions-dialog/terms-conditions-dialog.component";
 import { AxiosRequestsService } from "../services/axios-requests/axios-requests.service";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: "app-self-register",
@@ -43,7 +44,8 @@ export class SelfRegisterComponent implements OnInit {
     private iseService: IseService,
     private notificationService: NotificationService,
     private dialog: MatDialog,
-    private axiosRequestService: AxiosRequestsService
+    private axiosRequestService: AxiosRequestsService,
+    private spinnerService: NgxSpinnerService
   ) {}
 
   async ngOnInit() {
@@ -100,7 +102,9 @@ export class SelfRegisterComponent implements OnInit {
       emailAddress: this.emailFormControl.value
     };
     try {
+      await this.spinnerService.show();
       await this.axiosRequestService.createGuestUser(createGuestUserDto);
+      await this.spinnerService.hide();
       await this.sendGuestAccessNotification();
       this.resetForm();
     } catch (error) {

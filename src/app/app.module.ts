@@ -11,6 +11,7 @@ import { SocketIoModule } from "ngx-socket-io";
 import { GuestUsersSocket } from "./modules/sockets/GuestUsersSocket";
 import { LayoutModule } from "./modules/layout/layout/layout.module";
 import { TermsConditionsDialogComponent } from "./terms-conditions-dialog/terms-conditions-dialog.component";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TermsConditionsDialogComponent } from "./terms-conditions-dialog/terms-
     FormsModule,
     ReactiveFormsModule,
     SocketIoModule,
-    LayoutModule
+    LayoutModule,
+    NgxSpinnerModule
   ],
   providers: [GuestUsersSocket],
   entryComponents: [TermsConditionsDialogComponent],
