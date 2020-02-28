@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../services/authentication/auth.service";
 import { Router } from "@angular/router";
 import { NotificationService } from "../services/notification.service";
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-login",
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   emailFormControl = new FormControl("", [
     Validators.required,
-    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$")
   ]);
 
   passwordFormControl = new FormControl(undefined, Validators.required);
@@ -43,8 +43,6 @@ export class LoginComponent implements OnInit {
           false
         );
       }
-    } catch (error) {
-   
-    }
+    } catch (error) {}
   }
 }
