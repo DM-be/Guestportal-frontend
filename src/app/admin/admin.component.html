@@ -4,59 +4,46 @@
   <div class="example-container">
     <div class="mat-elevation-z8 tableContainer">
       <table mat-table [dataSource]="dataSource" matSort>
-        <!-- ID Column -->
         <ng-container matColumnDef="firstName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>First name</th>
           <td mat-cell *matCellDef="let guestUser">
             {{ guestUser.firstName }}
           </td>
         </ng-container>
-
-        <!-- Progress Column -->
         <ng-container matColumnDef="lastName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name</th>
           <td mat-cell *matCellDef="let guestUser">{{ guestUser.lastName }}</td>
         </ng-container>
-
-        <!-- Progress Column -->
         <ng-container matColumnDef="email" class="ellipsis">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
           <td mat-cell *matCellDef="let guestUser" class="ellipsis">
             {{ guestUser.emailAddress }}
           </td>
         </ng-container>
-
-        <!-- Progress Column -->
         <ng-container matColumnDef="visiting" class="ellipsis">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Visiting</th>
           <td mat-cell *matCellDef="let guestUser" class="ellipsis">
             {{ guestUser.personBeingVisited }}
           </td>
         </ng-container>
-
-        <!-- Progress Column -->
         <ng-container matColumnDef="from">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
           <td mat-cell *matCellDef="let guestUser">
             {{ formatDateStringFrom(guestUser) }}
           </td>
         </ng-container>
-
-        <!-- Progress Column -->
         <ng-container matColumnDef="to">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Expires</th>
           <td mat-cell *matCellDef="let guestUser">
             {{ formatDateStringTo(guestUser) }}
           </td>
         </ng-container>
-
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let guestUser">
             <button mat-button (click)="removeUser(guestUser)">Remove</button>
           </td>
         </ng-container>
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let guestUser; columns: displayedColumns"></tr>
       </table>
