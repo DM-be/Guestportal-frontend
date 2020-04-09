@@ -1,27 +1,25 @@
-# GuestPortalFrontend
+# GuestPortal-frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
+The frontend for the custom web portal built in Angular. Communicates with the backend found here. 
 
-## Development server
+## Purposes
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Provide both front desk employees of a company and visitors a way to easily register 'guest users' on a local guest wi-fi network. 
+Front desk employees need an overview of all guest users with the possibility to deny them further guest access. 
 
-## Code scaffolding
+## Implementation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+A simple form integrated with the Angular Material stepper module provides a guided self registration. An optional eID reader can be used to speed up the proces. 
 
-## Build
+Employees of the company can use the provided admin route to view a realtime data table after logging in to the application. 
+Security is implemented with a signed JWT token returned by the backend server after logging in successfully. To provide realtime data, the front end connects to the backend server with a secured websocket. Before establishing a full duplex connection the backend checks a provided JWT token. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Features
 
-## Running unit tests
+* protected routes using a JWT token and Angular route guards
+* optional eID service 
+* form control checking 
+* lazy loading of administrator module
+* realtime secured websocket connection with live data
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Demo
