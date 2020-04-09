@@ -23,3 +23,8 @@ Security is implemented with a signed JWT token returned by the backend server a
 * realtime secured websocket connection with live data
 
 ## Demo
+
+
+![selfregister](selfregister.gif)
+![realtime](realtime.gif)
+![login](login.gif)
